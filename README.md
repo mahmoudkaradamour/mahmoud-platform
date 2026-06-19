@@ -308,8 +308,3 @@ Senior Software & Information Systems Engineer
 This is not just another e-commerce platform.
 
 It is an attempt to **redefine how commerce works in real-world environments**.
-```
-
-
-
-اختر ماذا تريد 🔥
