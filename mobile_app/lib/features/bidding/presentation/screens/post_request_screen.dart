@@ -49,9 +49,9 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
             Container(
               padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
-                color: AppTheme.primary.withAlpha(13),
+                color: AppTheme.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(32.r),
-                border: Border.all(color: AppTheme.primary.withAlpha(26)),
+                border: Border.all(color: AppTheme.primary.withValues(alpha: 0.1)),
               ),
               child: Row(
                 children: [
@@ -60,7 +60,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
                   Expanded(
                     child: Text(
                       "Your request will be dispatched to the verified institutional network. Expect competitive quotes within minutes.",
-                      style: TextStyle(fontSize: 12.sp, color: Colors.slate-600, fontWeight: FontWeight.bold, height: 1.5),
+                      style: TextStyle(fontSize: 12.sp, color: Colors.blueGrey[600], fontWeight: FontWeight.bold, height: 1.5),
                     ),
                   ),
                 ],
@@ -76,7 +76,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
                 minimumSize: Size(double.infinity, 70.h),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
                 elevation: 10,
-                shadowColor: AppTheme.primary.withAlpha(77),
+                shadowColor: AppTheme.primary.withValues(alpha: 0.3),
               ),
               child: const Text("Execute Market Order", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, letterSpacing: 0.5)),
             ),
@@ -90,9 +90,9 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w900, color: Colors.slate-900, letterSpacing: -1)),
+        Text(title, style: TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey[900], letterSpacing: -1)),
         SizedBox(height: 6.h),
-        Text(subtitle, style: TextStyle(fontSize: 15.sp, color: Colors.slate-400, fontWeight: FontWeight.w500)),
+        Text(subtitle, style: TextStyle(fontSize: 15.sp, color: Colors.blueGrey[400], fontWeight: FontWeight.w500)),
       ],
     );
   }
@@ -100,7 +100,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
   Widget _buildInputLabel(String label) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10.h, left: 4.w),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, uppercase: true, color: Colors.slate-500, letterSpacing: 1)),
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Colors.blueGrey, letterSpacing: 1)),
     );
   }
 
@@ -109,7 +109,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: TextField(
         controller: controller,
@@ -118,7 +118,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
         style: const TextStyle(fontWeight: FontWeight.bold),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: TextStyle(color: Colors.slate-300, fontWeight: FontWeight.normal),
+          hintStyle: const TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.normal),
           prefixIcon: icon != null ? Icon(icon, color: AppTheme.primary, size: 20) : null,
           filled: true,
           fillColor: Colors.transparent,

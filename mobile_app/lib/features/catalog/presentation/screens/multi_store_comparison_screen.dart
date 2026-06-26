@@ -34,8 +34,8 @@ class MultiStoreComparisonScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(40.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20, offset: const Offset(0, 10))],
-        border: index == 0 ? Border.all(color: AppTheme.primary.withAlpha(51)) : null,
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 20, offset: const Offset(0, 10))],
+        border: index == 0 ? Border.all(color: AppTheme.primary.withValues(alpha: 0.2)) : null,
       ),
       child: Column(
         children: [
@@ -45,7 +45,7 @@ class MultiStoreComparisonScreen extends StatelessWidget {
                 height: 60.r,
                 width: 60.r,
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withAlpha(13),
+                  color: AppTheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: const Icon(Icons.business_center_outlined, color: AppTheme.primary),
@@ -56,7 +56,15 @@ class MultiStoreComparisonScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(stores[index], style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16.sp, letterSpacing: -0.5)),
-                    const Text("LOGISTICS: 24H SETTLEMENT", style: TextStyle(fontSize: 10, color: Colors.slate-400, fontWeight: FontWeight.black, uppercase: true, tracking: 1)),
+                    const Text(
+                      "LOGISTICS: 24H SETTLEMENT", 
+                      style: TextStyle(
+                        fontSize: 10, 
+                        color: Colors.blueGrey, 
+                        fontWeight: FontWeight.w900, 
+                        letterSpacing: 1
+                      )
+                    ),
                   ],
                 ),
               ),
@@ -70,7 +78,7 @@ class MultiStoreComparisonScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("UNIT PRICE", style: TextStyle(color: Colors.slate-300, fontWeight: FontWeight.black, fontSize: 10, uppercase: true)),
+                  const Text("UNIT PRICE", style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w900, fontSize: 10, letterSpacing: 1)),
                   Text(prices[index], style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 22.sp, letterSpacing: -1)),
                 ],
               ),
@@ -83,7 +91,7 @@ class MultiStoreComparisonScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                 ),
-                child: const Text("ACQUIRE", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12, uppercase: true)),
+                child: const Text("ACQUIRE", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
               ),
             ],
           ),

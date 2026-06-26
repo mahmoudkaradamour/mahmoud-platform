@@ -61,7 +61,7 @@ class MerchantDashboardScreen extends StatelessWidget {
               Positioned(
                 right: -40,
                 bottom: -40,
-                child: Icon(Icons.analytics, size: 240, color: Colors.white.withAlpha(13)),
+                child: Icon(Icons.analytics_outlined, size: 240, color: Colors.white.withValues(alpha: 0.05)),
               ),
             ],
           ),
@@ -93,7 +93,7 @@ class MerchantDashboardScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,8 +101,16 @@ class MerchantDashboardScreen extends StatelessWidget {
         children: [
           Icon(icon, color: color, size: 20),
           SizedBox(height: 10.h),
-          Text(value, style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, color: Colors.black87)),
-          Text(label, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.black, uppercase: true, letterSpacing: 0.5)),
+          Text(value, style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey[900])),
+          Text(
+            label, 
+            style: TextStyle(
+              fontSize: 10.sp, 
+              color: Colors.blueGrey[300], 
+              fontWeight: FontWeight.w900, 
+              letterSpacing: 0.5
+            )
+          ),
         ],
       ),
     );
@@ -118,8 +126,8 @@ class MerchantDashboardScreen extends StatelessWidget {
       children: [
         _buildActionItem(Icons.videocam_outlined, "Stream", AppTheme.error),
         _buildActionItem(Icons.add_business_outlined, "Inventory", AppTheme.primary),
-        _buildActionItem(Icons.badge_outlined, "Staff", Colors.black87),
-        _buildActionItem(Icons.tune_outlined, "Settings", Colors.black45),
+        _buildActionItem(Icons.badge_outlined, "Staff", Colors.blueGrey[900]!),
+        _buildActionItem(Icons.tune_outlined, "Settings", Colors.blueGrey[300]!),
       ],
     );
   }
@@ -130,14 +138,14 @@ class MerchantDashboardScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(18.w),
           decoration: BoxDecoration(
-            color: color.withAlpha(13),
+            color: color.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(22.r),
-            border: Border.all(color: color.withAlpha(26)),
+            border: Border.all(color: color.withValues(alpha: 0.1)),
           ),
           child: Icon(icon, color: color, size: 28),
         ),
         SizedBox(height: 12.h),
-        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900, color: Colors.black87)),
+        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey[900])),
       ],
     );
   }
@@ -154,7 +162,7 @@ class MerchantDashboardScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(30.r),
-            border: Border.all(color: Colors.black.withAlpha(5)),
+            border: Border.all(color: Colors.black.withValues(alpha: 0.02)),
           ),
           child: Row(
             children: [
@@ -169,7 +177,15 @@ class MerchantDashboardScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Entry #9821 - S. Hassan", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp)),
-                    Text("SKU: IP15-PRO • Processing", style: TextStyle(color: Colors.black26, fontSize: 10.sp, fontWeight: FontWeight.black, uppercase: true)),
+                    Text(
+                      "SKU: IP15-PRO • Processing", 
+                      style: TextStyle(
+                        color: Colors.blueGrey[300], 
+                        fontSize: 10.sp, 
+                        fontWeight: FontWeight.w900, 
+                        letterSpacing: 1
+                      )
+                    ),
                   ],
                 ),
               ),

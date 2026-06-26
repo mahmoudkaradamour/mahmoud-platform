@@ -28,7 +28,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
             trailing: Switch(
               value: _mfaEnabled,
               onChanged: (val) => setState(() => _mfaEnabled = val),
-              activeColor: AppTheme.primary,
+              activeTrackColor: AppTheme.primary,
             ),
           ),
           _buildEliteSettingTile(
@@ -76,7 +76,15 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   Widget _buildInstitutionalHeader(String title) {
     return Padding(
       padding: EdgeInsets.only(bottom: 24.h, left: 4.w),
-      child: Text(title, style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.black, color: AppTheme.primary, uppercase: true, tracking: 2)),
+      child: Text(
+        title, 
+        style: TextStyle(
+          fontSize: 14.sp, 
+          fontWeight: FontWeight.w900, 
+          color: AppTheme.primary, 
+          letterSpacing: 2
+        )
+      ),
     );
   }
 
@@ -87,18 +95,18 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(32.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20, offset: const Offset(0, 8))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 20, offset: const Offset(0, 8))],
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         onTap: onTap,
-        leading: icon != null ? Icon(icon, color: color ?? Colors.slate-400, size: 28) : null,
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.w900, color: color ?? Colors.slate-900, fontSize: 16.sp)),
+        leading: icon != null ? Icon(icon, color: color ?? Colors.blueGrey, size: 28) : null,
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.w900, color: color ?? Colors.blueGrey[900], fontSize: 16.sp)),
         subtitle: Padding(
           padding: EdgeInsets.only(top: 4.h),
-          child: Text(subtitle, style: TextStyle(fontSize: 11.sp, color: Colors.slate-400, fontWeight: FontWeight.w600)),
+          child: Text(subtitle, style: TextStyle(fontSize: 11.sp, color: Colors.blueGrey[400], fontWeight: FontWeight.w600)),
         ),
-        trailing: trailing ?? const Icon(Icons.chevron_right, size: 18, color: Colors.slate-200),
+        trailing: trailing ?? const Icon(Icons.chevron_right, size: 18, color: Colors.blueGrey),
       ),
     );
   }
@@ -111,10 +119,14 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
         title: Text("Confirm Institutional $action", style: const TextStyle(fontWeight: FontWeight.w900)),
         content: Text("Execute the $action protocol? This action will be recorded in the forensic ledger."),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("ABORT", style: TextStyle(fontWeight: FontWeight.black, color: Colors.slate-400))),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text("ABORT", style: TextStyle(fontWeight: FontWeight.w900, color: Colors.blueGrey))),
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.error, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r))),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.error, 
+              foregroundColor: Colors.white, 
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r))
+            ),
             child: const Text("EXECUTE", style: TextStyle(fontWeight: FontWeight.w900)),
           ),
         ],

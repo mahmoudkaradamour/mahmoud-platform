@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             end: Alignment.bottomCenter,
             colors: [
               AppTheme.background,
-              Colors.white.withAlpha(230),
+              Colors.white.withValues(alpha: 0.9),
             ],
           ),
         ),
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(30.r),
                       boxShadow: [
                         BoxShadow(
-                          color: AppTheme.primary.withAlpha(26),
+                          color: AppTheme.primary.withValues(alpha: 0.1),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -57,11 +57,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 40.h),
                 Text(
                   "Institutional Access",
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 32.sp, fontWeight: FontWeight.w900, tracking: -1),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    fontSize: 32.sp, 
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
                 Text(
                   "Establish a secure connection to the global ledger.",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w900),
                 ),
                 SizedBox(height: 40.h),
 
@@ -83,7 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {},
-                    child: const Text("Reset Credentials", style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)),
+                    child: const Text(
+                      "Reset Credentials", 
+                      style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)
+                    ),
                   ),
                 ),
 
@@ -96,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     minimumSize: Size(double.infinity, 65.h),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
                     elevation: 10,
-                    shadowColor: AppTheme.primary.withAlpha(102),
+                    shadowColor: AppTheme.primary.withValues(alpha: 0.4),
                   ),
                   child: Text(
                     "Authorize Session",
@@ -108,10 +114,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("New Institution?"),
+                    const Text("New Institution?", style: TextStyle(fontWeight: FontWeight.w900)),
                     TextButton(
                       onPressed: () {},
-                      child: const Text("Request Onboarding", style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)),
+                      child: const Text(
+                        "Request Onboarding", 
+                        style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)
+                      ),
                     ),
                   ],
                 ),
@@ -134,16 +143,16 @@ class _LoginScreenState extends State<LoginScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
-          BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4)),
         ],
       ),
       child: TextField(
         controller: controller,
         obscureText: isPassword,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.w900),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          labelStyle: const TextStyle(fontWeight: FontWeight.w900),
           prefixIcon: Icon(icon, color: AppTheme.primary, size: 22),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(24.r), borderSide: BorderSide.none),
           filled: true,

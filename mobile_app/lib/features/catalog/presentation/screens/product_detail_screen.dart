@@ -16,7 +16,6 @@ class ProductDetailScreen extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 450.h,
             pinned: true,
-            stretch: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: AppTheme.background,
@@ -29,10 +28,10 @@ class ProductDetailScreen extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                         decoration: BoxDecoration(
-                          color: Colors.slate-900.withAlpha(230),
+                          color: const Color(0xFF0F172A).withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(24.r),
-                          border: Border.all(color: Colors.white.withAlpha(26)),
-                          boxShadow: [BoxShadow(color: Colors.black.withAlpha(51), blurRadius: 40)],
+                          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 40)],
                         ),
                         child: Row(
                           children: [
@@ -40,7 +39,7 @@ class ProductDetailScreen extends StatelessWidget {
                             SizedBox(width: 12.w),
                             Text(
                               "Initiate AR View",
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 13.sp, uppercase: true, tracking: 1),
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 13.sp, letterSpacing: 1),
                             ),
                           ],
                         ),
@@ -63,12 +62,12 @@ class ProductDetailScreen extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
                         decoration: BoxDecoration(
-                          color: AppTheme.primary.withAlpha(26),
+                          color: AppTheme.primary.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
                           "Enterprise Certified",
-                          style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 10.sp, uppercase: true, tracking: 1),
+                          style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 10.sp, letterSpacing: 1),
                         ),
                       ),
                       IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline, color: AppTheme.error)),
@@ -77,12 +76,12 @@ class ProductDetailScreen extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Text(
                     "iPhone 15 Pro Max",
-                    style: TextStyle(fontSize: 34.sp, fontWeight: FontWeight.w900, color: Colors.slate-900, letterSpacing: -1.5),
+                    style: TextStyle(fontSize: 34.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey[900], letterSpacing: -1.5),
                   ),
                   SizedBox(height: 12.h),
                   Text(
                     "Natural Titanium • 1TB Institutional Grade",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.slate-500, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.blueGrey[400], fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 48.h),
                   Row(
@@ -91,21 +90,21 @@ class ProductDetailScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Market Valuation", style: TextStyle(color: Colors.slate-400, fontWeight: FontWeight.black, fontSize: 11, uppercase: true, tracking: 1)),
+                          const Text("Market Valuation", style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w900, fontSize: 11, letterSpacing: 1)),
                           Text("\$1,599.00", style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.w900, color: AppTheme.primary, letterSpacing: -1)),
                         ],
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
                         decoration: BoxDecoration(
-                          color: AppTheme.success.withAlpha(26),
+                          color: AppTheme.success.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(16.r),
                         ),
                         child: Row(
                           children: [
                             const Icon(Icons.check_circle_outline, color: AppTheme.success, size: 16),
                             SizedBox(width: 8.w),
-                            Text("Ready", style: TextStyle(color: AppTheme.success, fontWeight: FontWeight.w900, fontSize: 12.sp, uppercase: true)),
+                            Text("Ready", style: TextStyle(color: AppTheme.success, fontWeight: FontWeight.w900, fontSize: 12.sp)),
                           ],
                         ),
                       ),
@@ -117,7 +116,6 @@ class ProductDetailScreen extends StatelessWidget {
                   _buildInstitutionalSpec("Silicon", "A17 Pro Cluster"),
                   _buildInstitutionalSpec("Imaging", "48MP Phase Detect AF"),
                   _buildInstitutionalSpec("Interface", "USB-C High Speed Node"),
-                  _buildInstitutionalSpec("Network", "5G Global Protocol"),
                 ],
               ),
             ),
@@ -128,20 +126,20 @@ class ProductDetailScreen extends StatelessWidget {
         padding: EdgeInsets.all(32.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.at(top: BorderSide(color: Colors.slate-50)),
-          boxShadow: [BoxShadow(color: Colors.black.withAlpha(8), blurRadius: 30, offset: const Offset(0, -10))],
+          border: const Border(top: BorderSide(color: Colors.black12)),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 30, offset: const Offset(0, -10))],
         ),
         child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.slate-900,
+            backgroundColor: const Color(0xFF0F172A),
             foregroundColor: Colors.white,
             minimumSize: Size(double.infinity, 75.h),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.r)),
             elevation: 15,
-            shadowColor: Colors.black.withAlpha(77),
+            shadowColor: Colors.black.withValues(alpha: 0.3),
           ),
-          child: Text("Initiate Acquisition", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, uppercase: true, tracking: 1)),
+          child: const Text("Initiate Acquisition", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, letterSpacing: 1)),
         ),
       ),
     );
@@ -152,14 +150,14 @@ class ProductDetailScreen extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: Colors.slate-50,
+        color: Colors.blueGrey[50],
         borderRadius: BorderRadius.circular(22.r),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(key, style: const TextStyle(color: Colors.slate-400, fontWeight: FontWeight.black, fontSize: 12, uppercase: true)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.slate-800, fontSize: 14)),
+          Text(key, style: const TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w900, fontSize: 12)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.blueGrey, fontSize: 14)),
         ],
       ),
     );

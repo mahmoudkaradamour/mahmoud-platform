@@ -73,7 +73,7 @@ class CatalogScreen extends StatelessWidget {
               return Container(
                 width: 140.w,
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withAlpha(200),
+                  color: AppTheme.primary.withValues(alpha: 0.8), // Fixed syntax
                   borderRadius: BorderRadius.circular(30.r),
                 ),
                 child: const Center(child: Icon(Icons.auto_awesome, color: Colors.white30, size: 40)),
@@ -97,7 +97,7 @@ class CatalogScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30.r),
-          boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 15, offset: const Offset(0, 8))],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 15, offset: const Offset(0, 8))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +117,7 @@ class CatalogScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Electronics", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.black26)),
+                  Text("Electronics", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey)),
                   SizedBox(height: 4.h),
                   const Text("iPhone 15 Pro", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold), maxLines: 1),
                   SizedBox(height: 12.h),

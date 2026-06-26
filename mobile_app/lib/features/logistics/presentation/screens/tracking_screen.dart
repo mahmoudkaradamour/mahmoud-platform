@@ -35,7 +35,7 @@ class TrackingScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: const Color(0xFFE5E2DA),
+      color: Colors.blueGrey[50],
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +62,7 @@ class TrackingScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(50.r)),
-            boxShadow: [BoxShadow(color: Colors.black.withAlpha(26), blurRadius: 30)],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 30)],
           ),
           child: ListView(
             controller: scrollController,
@@ -72,7 +72,7 @@ class TrackingScreen extends StatelessWidget {
                 child: Container(
                   width: 60.w,
                   height: 6.h,
-                  decoration: BoxDecoration(color: Colors.slate-100, borderRadius: BorderRadius.circular(10.r)),
+                  decoration: BoxDecoration(color: Colors.blueGrey[50], borderRadius: BorderRadius.circular(10.r)),
                 ),
               ),
               SizedBox(height: 40.h),
@@ -81,13 +81,25 @@ class TrackingScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(radius: 28.r, backgroundColor: AppTheme.primary.withAlpha(26), child: const Icon(Icons.local_shipping_outlined, color: AppTheme.primary)),
+                      CircleAvatar(
+                        radius: 28.r, 
+                        backgroundColor: AppTheme.primary.withValues(alpha: 0.1), 
+                        child: const Icon(Icons.local_shipping_outlined, color: AppTheme.primary)
+                      ),
                       SizedBox(width: 20.w),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text("A. Mansour", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
-                          Text("Enterprise Logistics • Node #01", style: TextStyle(color: Colors.black38, fontSize: 10.sp, fontWeight: FontWeight.black, uppercase: true)),
+                          Text(
+                            "Enterprise Logistics • Node #01", 
+                            style: TextStyle(
+                              color: Colors.blueGrey[300], 
+                              fontSize: 10.sp, 
+                              fontWeight: FontWeight.w900, 
+                              letterSpacing: 1
+                            )
+                          ),
                         ],
                       ),
                     ],
@@ -102,13 +114,21 @@ class TrackingScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 40.h),
-              const Divider(color: Colors.black.withAlpha(13)),
+              const Divider(color: Colors.black12),
               SizedBox(height: 40.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text("Fulfillment Status", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20, letterSpacing: -0.5)),
-                  Text("ETA: 15 MIN", style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 12.sp, tracking: 1)),
+                  Text(
+                    "ETA: 15 MIN", 
+                    style: TextStyle(
+                      color: AppTheme.primary, 
+                      fontWeight: FontWeight.w900, 
+                      fontSize: 12.sp, 
+                      letterSpacing: 1
+                    )
+                  ),
                 ],
               ),
               SizedBox(height: 40.h),
@@ -126,7 +146,7 @@ class TrackingScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
-        color: color.withAlpha(26),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(18.r),
       ),
       child: Icon(icon, color: color, size: 22),
@@ -143,13 +163,14 @@ class TrackingScreen extends StatelessWidget {
               width: 22.w,
               height: 22.h,
               decoration: BoxDecoration(
-                color: isCurrent ? AppTheme.primary : (isPast ? AppTheme.primary.withAlpha(51) : Colors.slate-100),
+                color: isCurrent ? AppTheme.primary : (isPast ? AppTheme.primary.withValues(alpha: 0.2) : Colors.blueGrey[50]),
                 shape: BoxShape.circle,
                 border: isCurrent ? Border.all(color: Colors.white, width: 4) : null,
               ),
               child: isCurrent ? null : (isPast ? const Icon(Icons.check, size: 14, color: AppTheme.primary) : null),
             ),
-            if (title != "Final Handover") Container(width: 2.w, height: 50.h, color: isPast ? AppTheme.primary.withAlpha(51) : Colors.slate-100),
+            if (title != "Final Handover") 
+              Container(width: 2.w, height: 50.h, color: isPast ? AppTheme.primary.withValues(alpha: 0.2) : Colors.blueGrey[50]),
           ],
         ),
         SizedBox(width: 24.w),
@@ -157,8 +178,23 @@ class TrackingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15.sp, color: isPast ? Colors.black87 : Colors.black26)),
-              Text(time, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.black, uppercase: true)),
+              Text(
+                title, 
+                style: TextStyle(
+                  fontWeight: FontWeight.w900, 
+                  fontSize: 15.sp, 
+                  color: isPast ? Colors.blueGrey[900] : Colors.blueGrey[200]
+                )
+              ),
+              Text(
+                time, 
+                style: TextStyle(
+                  fontSize: 10.sp, 
+                  color: Colors.blueGrey[400], 
+                  fontWeight: FontWeight.w900, 
+                  letterSpacing: 1
+                )
+              ),
             ],
           ),
         ),

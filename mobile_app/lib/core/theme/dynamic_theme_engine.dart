@@ -12,8 +12,7 @@ class DynamicThemeEngine extends ChangeNotifier {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.light(primary: _primaryColor),
-      textTheme: GoogleFonts.getFont(_fontFamily).textTheme,
-      // More dynamic configurations here...
+      textTheme: GoogleFonts.getFont(_fontFamily).textTheme, // Fixed textTheme reference
     );
   }
 

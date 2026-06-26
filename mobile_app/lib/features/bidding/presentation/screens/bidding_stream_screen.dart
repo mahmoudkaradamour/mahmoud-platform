@@ -57,8 +57,14 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(32.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20, offset: const Offset(0, 8))],
-        border: index == 0 ? Border.all(color: AppTheme.primary.withAlpha(51)) : null,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05), // Fixed syntax
+            blurRadius: 20, 
+            offset: const Offset(0, 8)
+          )
+        ],
+        border: index == 0 ? Border.all(color: AppTheme.primary.withValues(alpha: 0.2)) : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,13 +74,24 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
             children: [
               Row(
                 children: [
-                  CircleAvatar(radius: 24.r, backgroundColor: AppTheme.primary.withAlpha(26), child: const Icon(Icons.business_outlined, color: AppTheme.primary)),
+                  CircleAvatar(
+                    radius: 24.r, 
+                    backgroundColor: AppTheme.primary.withValues(alpha: 0.1), 
+                    child: const Icon(Icons.business_outlined, color: AppTheme.primary)
+                  ),
                   SizedBox(width: 16.w),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text("Tier-1 Partner", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15)),
-                      Text("Verified Network • Node #7", style: TextStyle(fontSize: 10.sp, color: Colors.slate-400, fontWeight: FontWeight.black, uppercase: true)),
+                      Text(
+                        "Verified Network • Node #7", 
+                        style: TextStyle(
+                          fontSize: 10.sp, 
+                          color: Colors.blueGrey, // Fixed color
+                          fontWeight: FontWeight.w900, 
+                        )
+                      ),
                     ],
                   ),
                 ],
@@ -85,7 +102,7 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
           SizedBox(height: 32.h),
           Text(
             "Inventory confirmed. Full institutional warranty and logic clearance provided.",
-            style: TextStyle(fontSize: 14.sp, color: Colors.slate-600, fontWeight: FontWeight.w500, height: 1.5),
+            style: TextStyle(fontSize: 14.sp, color: Colors.blueGrey[600], fontWeight: FontWeight.w500, height: 1.5),
           ),
           SizedBox(height: 32.h),
           Row(
@@ -94,7 +111,15 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("STRIKE PRICE", style: TextStyle(color: Colors.slate-300, fontWeight: FontWeight.black, fontSize: 10, uppercase: true, tracking: 1)),
+                  const Text(
+                    "STRIKE PRICE", 
+                    style: TextStyle(
+                      color: Colors.blueGrey, 
+                      fontWeight: FontWeight.w900, 
+                      fontSize: 10, 
+                      letterSpacing: 1
+                    )
+                  ),
                   Text("\$1,180.00", style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900, color: AppTheme.primary, letterSpacing: -1)),
                 ],
               ),
@@ -106,9 +131,9 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
                   elevation: 8,
-                  shadowColor: AppTheme.primary.withAlpha(77),
+                  shadowColor: AppTheme.primary.withValues(alpha: 0.3),
                 ),
-                child: const Text("Execute Settlement", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, uppercase: true)),
+                child: const Text("Execute Settlement", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13)),
               ),
             ],
           ),
