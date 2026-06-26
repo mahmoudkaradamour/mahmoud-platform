@@ -11,6 +11,7 @@ const menuItems = [
   { name: "متاجري", icon: Store, href: "/dashboard/stores" },
   { name: "المنتجات", icon: Package, href: "/dashboard/products" },
   { name: "فرص المزايدة", icon: Gavel, href: "/dashboard/opportunities" },
+  { name: "المحفظة", icon: Wallet, href: "/dashboard/wallet" },
   { name: "المحادثات", icon: MessageSquare, href: "/dashboard/messages" },
   { name: "الإعدادات", icon: Settings, href: "/dashboard/settings" },
 ];
