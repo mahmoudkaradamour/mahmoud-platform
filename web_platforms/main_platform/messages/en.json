@@ -1,0 +1,15 @@
+{
+  "Common": {
+    "title": "Mahmoud Platform",
+    "search": "Search for products...",
+    "cart": "Cart",
+    "login": "Login",
+    "register": "Join Now"
+  },
+  "HomePage": {
+    "heroTitle": "Discover the Generation of Sovereign Commerce",
+    "heroSubtitle": "Enjoy an immersive shopping experience powered by AR",
+    "categories": "Main Categories",
+    "bestSellers": "Best Sellers"
+  }
+}
