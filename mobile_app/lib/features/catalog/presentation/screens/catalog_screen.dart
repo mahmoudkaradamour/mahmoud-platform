@@ -4,7 +4,7 @@ import 'package:mobile_app/shared/theme/app_theme.dart';
 import 'package:mobile_app/features/catalog/presentation/screens/product_detail_screen.dart';
 
 /// Mobile Catalog Discovery Screen.
-/// Implements ZCL (Zero Cognitive Load) via clean grid layout and high-fidelity cards.
+/// Enhanced with AI Recommendations "For You" section.
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
 
@@ -12,31 +12,76 @@ class CatalogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("اكتشف المنتجات"),
+        title: const Text("اكتشف المنصة السيادية"),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search, color: Colors.black),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.tune, color: Colors.black),
-          ),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications_none, color: Colors.black)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black)),
         ],
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(20.w),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.65,
-          crossAxisSpacing: 15.w,
-          mainAxisSpacing: 15.h,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildRecommendationsSection(context),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
+              child: const Text("كل المنتجات", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.all(20.w),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.65,
+                crossAxisSpacing: 15.w,
+                mainAxisSpacing: 15.h,
+              ),
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return _buildProductCard(context, index);
+              },
+            ),
+          ],
         ),
-        itemCount: 6,
-        itemBuilder: (context, index) {
-          return _buildProductCard(context, index);
-        },
       ),
+    );
+  }
+
+  Widget _buildRecommendationsSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("مختارات لك (AI)", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: AppTheme.primary)),
+              TextButton(onPressed: () {}, child: const Text("المزيد")),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 180.h,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            scrollDirection: Axis.horizontal,
+            itemCount: 3,
+            separatorBuilder: (context, index) => SizedBox(width: 15.w),
+            itemBuilder: (context, index) {
+              return Container(
+                width: 140.w,
+                decoration: BoxDecoration(
+                  color: AppTheme.primary.withAlpha(200),
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+                child: const Center(child: Icon(Icons.auto_awesome, color: Colors.white30, size: 40)),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -52,13 +97,7 @@ class CatalogScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withAlpha(8),
-              blurRadius: 15,
-              offset: const Offset(0, 8),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 15, offset: const Offset(0, 8))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,31 +109,7 @@ class CatalogScreen extends StatelessWidget {
                   color: AppTheme.background,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
                 ),
-                child: Stack(
-                  children: [
-                    const Center(
-                      child: Icon(Icons.shopping_bag_outlined, size: 50, color: Colors.black12),
-                    ),
-                    Positioned(
-                      top: 12.h,
-                      right: 12.w,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.star, size: 12, color: Colors.amber),
-                            SizedBox(width: 2.w),
-                            Text("4.9", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                child: const Center(child: Icon(Icons.shopping_bag_outlined, size: 50, color: Colors.black12)),
               ),
             ),
             Padding(
@@ -102,35 +117,11 @@ class CatalogScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "إلكترونيات",
-                    style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.black26),
-                  ),
+                  Text("إلكترونيات", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.black26)),
                   SizedBox(height: 4.h),
-                  Text(
-                    "هاتف آيفون 15 برو ماكس",
-                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: Colors.black87),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  const Text("آيفون 15 برو", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold), maxLines: 1),
                   SizedBox(height: 12.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "\$1200",
-                        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, color: AppTheme.primary),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(6.w),
-                        decoration: BoxDecoration(
-                          color: AppTheme.primary,
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: const Icon(Icons.add, color: Colors.white, size: 18),
-                      ),
-                    ],
-                  ),
+                  Text("\$1200", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, color: AppTheme.primary)),
                 ],
               ),
             ),
