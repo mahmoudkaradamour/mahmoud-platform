@@ -5,6 +5,7 @@ use App\Modules\Catalog\Presentation\Controllers\ProductController;
 use App\Modules\Bidding\Presentation\Controllers\BiddingController;
 use App\Modules\Marketplace\Presentation\Controllers\MerchantController;
 use App\Modules\Logistics\Presentation\Controllers\LogisticsController;
+use App\Modules\Financial\Presentation\Controllers\FinancialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +47,12 @@ Route::prefix('v1/logistics')->group(function () {
     Route::get('/track/{number}', [LogisticsController.class, 'track']);
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/my-shipments', [LogisticsController.class, 'myShipments']);
+    });
+});
+
+Route::prefix('v1/financial')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/transactions', [FinancialController.class, 'history']);
+        Route::post('/pay', [FinancialController.class, 'pay']);
     });
 });
