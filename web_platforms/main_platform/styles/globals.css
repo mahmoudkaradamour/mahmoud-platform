@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 10 132 255;
+  --secondary: 48 176 199;
+  --background: 242 242 247;
+  --surface: 255 255 255;
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+}
+
+.glass-effect {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
