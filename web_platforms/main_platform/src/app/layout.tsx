@@ -3,6 +3,7 @@ import { Cairo } from "next/font/google";
 import "../../styles/globals.css";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import QueryProvider from "@/lib/providers/query-provider";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -27,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" className={cn(cairo.variable, "antialiased")}>
       <body className="bg-background text-slate-900 font-cairo">
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <QueryProvider>
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </QueryProvider>
       </body>
     </html>
   );
