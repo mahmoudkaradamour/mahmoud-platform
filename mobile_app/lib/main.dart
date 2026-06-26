@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 import 'package:mobile_app/core/native_bridge/platform_channel.dart';
-import 'package:mobile_app/features/identity/presentation/screens/login_screen.dart';
+import 'package:mobile_app/features/catalog/presentation/screens/catalog_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Security Handshake at startup: Verify Native Integrity
-  // In dynamic production environments, this would use hardware-backed checks.
   bool isSecure = true; 
   try {
     isSecure = await PlatformChannel.isEnvironmentSecure();
@@ -51,7 +49,7 @@ class MahmoudPlatformApp extends StatelessWidget {
               child: widget!,
             );
           },
-          home: const LoginScreen(), // Directly routing to Login for Stage 2
+          home: const CatalogScreen(), // Show Catalog as home for Stage 3
         );
       },
     );
