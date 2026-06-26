@@ -3,41 +3,23 @@
 namespace App\Modules\Catalog\Application\Actions\Scraping;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Bus;
+use App\Modules\Catalog\Infrastructure\Jobs\ProcessProductScrapeJob;
 
 /**
- * AI-Powered Product Scraper Action.
- * Automatically ingests product variations from external URLs.
+ * Hardened Asynchronous Scraper.
+ * Moves logic to background queues with Proxy Rotation stubs to avoid IP Bans.
  */
 class ScrapeExternalProductAction
 {
-    public function execute(string $url): array
+    public function execute(string $url, int $merchantId): string
     {
-        // 1. Fetch content (Simulated, would use Guzzle/Puppeteer in prod)
-        $response = Http::get($url);
+        // 1. Instant Response to UI (No more 500 timeouts)
+        $jobId = uniqid('scrape_');
 
-        // 2. AI Parsing Logic (Mocked logic for iPhone example)
-        // This would use LLM or specialized parsers to extract JSON structure
-        return [
-            'base_name' => 'iPhone 15 Pro',
-            'brand' => 'Apple',
-            'category' => 'Smartphones',
-            'variants' => [
-                [
-                    'color' => 'Natural Titanium',
-                    'memory' => '256GB',
-                    'sku' => Str::random(10),
-                    'specs' => ['chip' => 'A17 Pro', 'display' => '6.1 inch']
-                ],
-                [
-                    'color' => 'Blue Titanium',
-                    'memory' => '512GB',
-                    'sku' => Str::random(10),
-                    'specs' => ['chip' => 'A17 Pro', 'display' => '6.1 inch']
-                ]
-            ],
-            'media' => ['https://images.apple.com/iphone-15-pro-1.jpg'],
-            'global_product_id' => 'UPC-APPLE-IPHONE15P-001' // Critical for cross-store grouping
-        ];
+        // 2. Dispatch to dedicated queue with Rate Limiting
+        Bus::dispatch(new ProcessProductScrapeJob($url, $merchantId, $jobId));
+
+        return $jobId; // Frontend polls for this ID or waits for Push Notification
     }
 }
