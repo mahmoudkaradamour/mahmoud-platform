@@ -6,6 +6,7 @@ use App\Modules\Bidding\Presentation\Controllers\BiddingController;
 use App\Modules\Marketplace\Presentation\Controllers\MerchantController;
 use App\Modules\Logistics\Presentation\Controllers\LogisticsController;
 use App\Modules\Financial\Presentation\Controllers\FinancialController;
+use App\Modules\Communication\Presentation\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,5 +55,12 @@ Route::prefix('v1/financial')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/transactions', [FinancialController.class, 'history']);
         Route::post('/pay', [FinancialController.class, 'pay']);
+    });
+});
+
+Route::prefix('v1/communication')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/notifications', [NotificationController.class, 'index']);
+        Route::patch('/notifications/{id}/read', [NotificationController.class, 'markAsRead']);
     });
 });
