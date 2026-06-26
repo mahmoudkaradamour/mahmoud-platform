@@ -1,8 +1,5 @@
-/**
- * Product Domain Entity.
- * Represents the core business logic of a Catalog item.
- * Clean Architecture: This is independent of any external libraries.
- */
+/// Product Domain Entity.
+/// Represents the core business logic of a Catalog item.
 class Product {
   final String id;
   final String storeId;

@@ -1,7 +1,5 @@
-/**
- * Shipment Entity - Clean Architecture.
- * Represents the state and journey of a physical package.
- */
+/// Shipment Entity - Clean Architecture.
+/// Represents the state and journey of a physical package.
 class Shipment {
   final String id;
   final String orderId;
