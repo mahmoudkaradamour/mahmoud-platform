@@ -1,0 +1,32 @@
+name: Sovereign Enterprise CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: mongodb, pdo_pgsql, redis
+    - name: Install Dependencies
+      run: cd backend && composer install
+    - name: Run Tests
+      run: cd backend && php artisan test
+
+  mobile-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.44.3'
+    - run: cd mobile_app && flutter pub get
+    - run: cd mobile_app && flutter test

@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "welcome": "مرحباً بك في منصة محمود"
+  },
+  "catalog": {
+    "products": "المنتجات",
+    "add_to_cart": "إضافة للسلة"
+  },
+  "bidding": {
+    "post_request": "نشر طلب شراء",
+    "submit_quote": "تقديم عرض سعر"
+  }
+}
