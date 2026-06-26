@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 import 'package:mobile_app/core/native_bridge/platform_channel.dart';
+import 'package:mobile_app/core/security/app_hardener.dart';
 import 'package:mobile_app/features/catalog/presentation/screens/catalog_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  // High-Level Security Checklist
   bool isSecure = true; 
   try {
-    isSecure = await PlatformChannel.isEnvironmentSecure();
+    final integrity = await PlatformChannel.isEnvironmentSecure();
+    final installerValid = await AppHardener.isInstallationSourceValid();
+    final tamperingDetected = await AppHardener.isTamperingDetected();
+    
+    // Decisions made here in Native/Core
+    isSecure = integrity && installerValid && !tamperingDetected;
   } catch (e) {
     isSecure = false;
   }
@@ -37,9 +44,9 @@ class MahmoudPlatformApp extends StatelessWidget {
               return const Scaffold(
                 body: Center(
                   child: Text(
-                    "Security Compromised: Native Integrity Failure.",
+                    "بيئة التشغيل غير آمنة أو التطبيق معدل. تم الإيقاف حمايةً لبياناتك.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                    style: TextStyle(fontWeight: FontWeight.w900, color: Colors.red),
                   ),
                 ),
               );
@@ -72,10 +79,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
-    
     _controller.forward();
     
-    // System Boot & Sync Logic
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
@@ -100,47 +105,42 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF000000), // Elite Black Background for Splash
-        ),
-        child: Center(
-          child: FadeTransition(
-            opacity: _opacity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Unified Shield Icon Representation
-                Container(
-                   padding: const EdgeInsets.all(30),
-                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppTheme.primary.withOpacity(0.5), width: 2),
-                   ),
-                   child: const Icon(Icons.shield_outlined, size: 80, color: AppTheme.primary),
+      backgroundColor: Colors.black,
+      body: Center(
+        child: FadeTransition(
+          opacity: _opacity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                 padding: const EdgeInsets.all(30),
+                 decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppTheme.primary.withAlpha(128), width: 2),
+                 ),
+                 child: const Icon(Icons.shield_outlined, size: 80, color: AppTheme.primary),
+              ),
+              const SizedBox(height: 40),
+              const Text(
+                "MAHMOUD",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 42,
+                  fontWeight: FontWeight.w900, // Fixed FontWeight.black
+                  letterSpacing: 8,
                 ),
-                const SizedBox(height: 40),
-                const Text(
-                  "MAHMOUD",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 42,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 8,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "SOVEREIGN ECOSYSTEM",
+                style: TextStyle(
+                  color: AppTheme.primary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 2,
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  "SOVEREIGN ECOSYSTEM",
-                  style: TextStyle(
-                    color: AppTheme.primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.black,
-                    letterSpacing: 2,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

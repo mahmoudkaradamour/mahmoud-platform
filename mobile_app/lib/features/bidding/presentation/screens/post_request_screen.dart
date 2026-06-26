@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/**
- * Post Purchase Request Screen.
- * Part of the Sovereign On-Demand System.
- * Users post what they need and merchants bid.
- */
+/// Post Purchase Request Screen - Refactored for Flutter 3.x.
 class PostRequestScreen extends StatefulWidget {
   const PostRequestScreen({super.key});
 
@@ -52,9 +48,9 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
             Container(
               padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
-                color: AppTheme.primary.withOpacity(0.05),
+                color: AppTheme.primary.withAlpha(13), // Fixed withAlpha
                 borderRadius: BorderRadius.circular(24.r),
-                border: Border.all(color: AppTheme.primary.withOpacity(0.1)),
+                border: Border.all(color: AppTheme.primary.withAlpha(26)),
               ),
               child: Row(
                 children: [
@@ -81,7 +77,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
                 minimumSize: Size(double.infinity, 65.h),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
               ),
-              child: const Text("نشر الطلب الآن", style: TextStyle(fontWeight: FontWeight.black, fontSize: 18)),
+              child: const Text("نشر الطلب الآن", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
             ),
           ],
         ),
@@ -93,7 +89,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.black, color: Colors.black)),
+        Text(title, style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900, color: Colors.black)),
         SizedBox(height: 4.h),
         Text(subtitle, style: TextStyle(fontSize: 14.sp, color: Colors.black45, fontWeight: FontWeight.bold)),
       ],
@@ -103,7 +99,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
   Widget _buildInputLabel(String label) {
     return Padding(
       padding: EdgeInsets.only(bottom: 8.h, right: 4.w),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.black, fontSize: 14)),
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14)),
     );
   }
 

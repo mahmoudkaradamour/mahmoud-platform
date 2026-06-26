@@ -4,70 +4,65 @@ import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
-import android.provider.Settings
+import android.content.pm.PackageManager
+import android.os.Build
 import java.io.File
 
 /**
- * Enterprise Android Main Activity.
- * Implements the Native Security Layer for the Mahmoud Platform.
- * Decisions are made here, Flutter only displays the results.
+ * Enterprise Android Main Activity - Elite Security Edition.
+ * Handles Root detection, Tampering detection, and Installer Verification.
  */
 class MainActivity: FlutterActivity() {
-    private val CHANNEL = "com.mahmoud.platform/security"
+    private val SECURITY_CHANNEL = "com.mahmoud.platform/security"
+    private val HARDENER_CHANNEL = "com.mahmoud.platform/hardener"
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
+        // Channel 1: Platform Security
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SECURITY_CHANNEL).setMethodCallHandler {
+            call, result ->
+            if (call.method == "checkIntegrity") {
+                result.success(!isDeviceCompromised())
+            } else {
+                result.notImplemented()
+            }
+        }
+
+        // Channel 2: App Hardener (Anti-Tamper)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, HARDENER_CHANNEL).setMethodCallHandler {
             call, result ->
             when (call.method) {
-                "checkIntegrity" -> {
-                    val isSecure = checkRootMethod1() || checkRootMethod2() || checkRootMethod3()
-                    // If any root trace found, environment is NOT secure
-                    result.success(!isSecure)
+                "getInstallerPackageName" -> {
+                    val installer = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        packageManager.getInstallSourceInfo(packageName).installingPackageName
+                    } else {
+                        packageManager.getInstallerPackageName(packageName)
+                    }
+                    result.success(installer)
                 }
-                "encryptData" -> {
-                    val data = call.argument<String>("data")
-                    // Hardware KeyStore logic would go here for AES-256
-                    result.success("SECURED_$data") 
+                "checkTamperingTools" -> {
+                    result.success(detectTamperingTools())
                 }
-                else -> {
-                    result.notImplemented()
-                }
+                else -> result.notImplemented()
             }
         }
     }
 
-    /**
-     * Advanced Root Detection Algorithms.
-     */
-    private fun checkRootMethod1(): Boolean {
-        val buildTags = android.os.Build.TAGS
-        return buildTags != null && buildTags.contains("test-keys")
+    private fun isDeviceCompromised(): Boolean {
+        val rootPaths = arrayOf("/system/app/Superuser.apk", "/sbin/su", "/system/bin/su", "/system/xbin/su", "/data/local/xbin/su", "/data/local/bin/su", "/system/sd/xbin/su")
+        for (path in rootPaths) { if (File(path).exists()) return true }
+        return Build.TAGS != null && Build.TAGS.contains("test-keys")
     }
 
-    private fun checkRootMethod2(): Boolean {
-        val paths = arrayOf(
-            "/system/app/Superuser.apk", "/sbin/su", "/system/bin/su", "/system/xbin/su",
-            "/data/local/xbin/su", "/data/local/bin/su", "/system/sd/xbin/su",
-            "/system/bin/failsafe/su", "/data/local/su"
-        )
-        for (path in paths) {
-            if (File(path).exists()) return true
+    private fun detectTamperingTools(): Boolean {
+        val tamperingApps = arrayOf("com.chelpus.lackypatch", "com.dimonvideo.luckypatcher", "com.android.vending.billing.InAppBillingService.LUCK")
+        for (app in tamperingApps) {
+            try {
+                packageManager.getPackageInfo(app, 0)
+                return true
+            } catch (e: PackageManager.NameNotFoundException) { }
         }
         return false
-    }
-
-    private fun checkRootMethod3(): Boolean {
-        var process: Process? = null
-        return try {
-            process = Runtime.getRuntime().exec(arrayOf("/system/xbin/which", "su"))
-            val reader = process.inputStream.bufferedReader()
-            reader.readLine() != null
-        } catch (t: Throwable) {
-            false
-        } finally {
-            process?.destroy()
-        }
     }
 }
