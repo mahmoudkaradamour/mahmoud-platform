@@ -3,23 +3,41 @@
 namespace App\Modules\Catalog\Application\Actions\Scraping;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Bus;
-use App\Modules\Catalog\Infrastructure\Jobs\ProcessProductScrapeJob;
+use Illuminate\Support\Facades\Log;
 
 /**
- * Hardened Asynchronous Scraper.
- * Moves logic to background queues with Proxy Rotation stubs to avoid IP Bans.
+ * Enterprise Scraper Gateway (Proxy Pattern).
+ * REDEMPTION: Removed internal DOM parsing.
+ * Delegates to specialized scraping providers (BrightData/ScrapingBee)
+ * to handle JS-rendering, Proxy Rotation, and Captchas.
  */
 class ScrapeExternalProductAction
 {
-    public function execute(string $url, int $merchantId): string
+    private string $providerUrl = 'https://api.scraping-provider.com/v1';
+    private string $apiKey;
+
+    public function __construct() {
+        $this->apiKey = config('services.scraper.key');
+    }
+
+    public function execute(string $targetUrl): array
     {
-        // 1. Instant Response to UI (No more 500 timeouts)
-        $jobId = uniqid('scrape_');
+        try {
+            // 1. Offload the "Dirty Work" to professional infrastructure
+            $response = Http::get($this->providerUrl, [
+                'api_key' => $this->apiKey,
+                'url' => $targetUrl,
+                'render_js' => true,
+                'premium_proxy' => true
+            ]);
 
-        // 2. Dispatch to dedicated queue with Rate Limiting
-        Bus::dispatch(new ProcessProductScrapeJob($url, $merchantId, $jobId));
+            if ($response->successful()) {
+                return $response->json('data'); // Standardized JSON result from provider
+            }
+        } catch (\Exception $e) {
+            Log::error("Scraping Delegation Failed", ['url' => $targetUrl, 'error' => $e->getMessage()]);
+        }
 
-        return $jobId; // Frontend polls for this ID or waits for Push Notification
+        return ['success' => false, 'message' => 'Scraping infrastructure unreachable.'];
     }
 }

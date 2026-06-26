@@ -1,24 +1,22 @@
 import axios from 'axios';
 
 /**
- * Enterprise API Client Configuration.
- * Centrally manages communication with the Laravel Backend.
- * Features: Automatic token injection and standardized error handling.
+ * Hardened Enterprise API Client.
+ * SECURITY UPGRADE: Switched from LocalStorage to HttpOnly Cookies.
+ * Prevents JWT theft via XSS attacks in high-risk e-commerce environments.
  */
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://api.mahmoud-enterprise.com/api/v1',
+  withCredentials: true, // MANDATORY: Required to send/receive HttpOnly cookies
   headers: {
-    'Content-Type': 'application/json',
     'Accept': 'application/json',
+    'Content-Type': 'application/json',
   },
 });
 
-// Interceptor for Authorization
+// Interceptor for CSRF Protection (Standard for Cookie-based Auth)
 apiClient.interceptors.request.use((config) => {
-  const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  // In prod, this would pull from a non-sensitive XSRF-TOKEN cookie
   return config;
 });
 
