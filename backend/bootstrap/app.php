@@ -13,11 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\App\Http\Middleware\SecurityHeadersMiddleware::class);
+        $middleware->append(\App\Http\Middleware\DatabaseSessionSecurity::class);
 
         /**
-         * Enterprise Security: PostgreSQL Row-Level Security Bridge.
+         * Enterprise WAF: Intelligent Firewall.
          */
-        $middleware->append(\App\Http\Middleware\DatabaseSessionSecurity::class);
+        $middleware->append(\App\Http\Middleware\IntelligentFirewallMiddleware::class);
 
         $middleware->throttleApi('api');
     })

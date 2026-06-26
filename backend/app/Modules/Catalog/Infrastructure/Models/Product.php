@@ -4,6 +4,9 @@ namespace App\Modules\Catalog\Infrastructure\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
+/**
+ * Enhanced Product Model with Global Targeting Support.
+ */
 class Product extends Model
 {
     protected $connection = 'mongodb';
@@ -19,13 +22,15 @@ class Product extends Model
         'attributes',
         'media',
         'metadata',
-        'status'
+        'status',
+        'targeting' // New field: ['regions' => [], 'min_age' => 0]
     ];
 
     protected $casts = [
         'attributes' => 'array',
         'media' => 'array',
         'metadata' => 'array',
+        'targeting' => 'array',
         'base_price' => 'float'
     ];
 }
