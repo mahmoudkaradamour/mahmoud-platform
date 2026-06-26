@@ -2,38 +2,33 @@
 
 namespace App\Modules\Discovery\Application\Actions;
 
-use App\Modules\Discovery\Infrastructure\Models\UserInteraction;
 use App\Modules\Catalog\Infrastructure\Models\Product;
+use Illuminate\Support\Facades\Http;
 
 /**
- * AI-Driven Recommendation Service.
- * Implements a hybrid filtering strategy to surface personalized products.
+ * AI-Driven Recommendation Service - Microservice Edition.
+ * Offloads heavy vector calculations to a dedicated AI Service (Python/Milvus).
+ * Prevents "CPU Starvation" on the Main API Gateway.
  */
 class GetRecommendationsAction
 {
+    private string $aiServiceUrl = 'https://ai-domain.sovereign.com/v1';
+
     public function execute(int $userId, int $limit = 10): array
     {
-        // 1. Fetch User Profile (Last interacted categories/brands)
-        $interactions = UserInteraction::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')
-            ->limit(50)
-            ->get();
+        try {
+            // 1. Fetch User Vector/Profile from AI Microservice
+            $response = Http::withHeaders(['X-Sovereign-Internal' => 'V1'])
+                ->get("{$this $this->aiServiceUrl}/recommendations/{$userId}", ['limit' => $limit]);
 
-        if ($interactions->isEmpty()) {
-            // Cold Start: Return top trending products
-            return Product::orderBy('metadata.sales_count', 'desc')->limit($limit)->get()->toArray();
+            if ($response->successful()) {
+                $productIds = $response->json('data.top_matches');
+                return Product::whereIn('_id', $productIds)->get()->toArray();
+            }
+        } catch (\Exception $e) {
+            // Fallback logic to native PHP popularity-based results
         }
 
-        $favCategories = $interactions->pluck('metadata.category_path')->unique()->toArray();
-        $favBrands = $interactions->pluck('metadata.brand')->unique()->toArray();
-
-        // 2. Query Hybrid Logic: Similarity + Popularity
-        return Product::whereIn('category_path', $favCategories)
-            ->orWhereIn('metadata.brand', $favBrands)
-            ->where('status', 'ACTIVE')
-            ->orderBy('metadata.sales_count', 'desc')
-            ->limit($limit)
-            ->get()
-            ->toArray();
+        return Product::orderBy('metadata.sales_count', 'desc')->limit($limit)->get()->toArray();
     }
 }
