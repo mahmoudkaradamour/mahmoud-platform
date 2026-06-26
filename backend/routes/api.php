@@ -1,6 +1,8 @@
 <?php
 
 use App\Modules\Identity\Presentation\Controllers\AuthController;
+use App\Modules\Catalog\Presentation\Controllers\ProductController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1/auth')->group(function () {
@@ -13,4 +15,10 @@ Route::prefix('v1/auth')->group(function () {
             return new \App\Modules\Identity\Presentation\Resources\UserResource($request->user());
         });
     });
+});
+
+Route::prefix('v1/catalog')->group(function () {
+    Route::get('/products', [ProductController.class, 'index']);
+    Route::get('/products/{id}', [ProductController.class, 'show']);
+    Route::post('/products', [ProductController.class, 'store']);
 });
