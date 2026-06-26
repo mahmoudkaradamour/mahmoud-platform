@@ -1,14 +1,11 @@
 import 'package:dio/dio.dart';
 
-/**
- * Enterprise Mobile API Client.
- * Handles secure communication with the Laravel V1 Backend.
- * Features: Timeout management, Interceptors, and Standardized Error Parsing.
- */
+/// Enterprise Mobile API Client.
+/// Handles secure communication with the Laravel V1 Backend.
 class ApiClient {
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://10.0.2.2:8000/api/v1', // Android Emulator localhost
+      baseUrl: 'http://10.0.2.2:8000/api/v1',
       connectTimeout: const Duration(seconds: 15),
       receiveTimeout: const Duration(seconds: 15),
       headers: {
@@ -18,8 +15,5 @@ class ApiClient {
     ),
   );
 
-  static Dio get instance {
-    // Add logging and auth interceptors here in later stages
-    return _dio;
-  }
+  static Dio get instance => _dio;
 }
