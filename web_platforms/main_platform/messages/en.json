@@ -1,15 +1,15 @@
 {
   "Common": {
-    "title": "Mahmoud Platform",
-    "search": "Search for products...",
+    "title": "Mahmoud Enterprise Platform",
+    "search": "Search Global Inventory...",
     "cart": "Cart",
-    "login": "Login",
+    "login": "Sign In",
     "register": "Join Now"
   },
   "HomePage": {
-    "heroTitle": "Discover the Generation of Sovereign Commerce",
-    "heroSubtitle": "Enjoy an immersive shopping experience powered by AR",
-    "categories": "Main Categories",
+    "heroTitle": "Discover the Future of Global Commerce",
+    "heroSubtitle": "Experience an immersive marketplace with institutional standards",
+    "categories": "Main Sectors",
     "bestSellers": "Best Sellers"
   }
 }

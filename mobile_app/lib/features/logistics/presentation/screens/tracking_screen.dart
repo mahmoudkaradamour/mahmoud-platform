@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Real-time Shipment Tracking Screen.
-/// Features: Interactive Map (stubbed), Status Timeline, and Courier Contact.
+/// Enterprise Logistics Tracking.
+/// Real-time node monitoring and courier orchestration.
 class TrackingScreen extends StatelessWidget {
   const TrackingScreen({super.key});
 
@@ -16,11 +16,11 @@ class TrackingScreen extends StatelessWidget {
           _buildMapPlaceholder(),
           Positioned(
             top: 60.h,
-            right: 20.w,
+            left: 20.w,
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: IconButton(
-                icon: const Icon(Icons.arrow_forward, color: Colors.black),
+                icon: const Icon(Icons.arrow_back, color: Colors.black),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -40,11 +40,11 @@ class TrackingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.map_outlined, size: 100, color: Colors.black12),
-            SizedBox(height: 20.h),
+            const Icon(Icons.location_searching, size: 80, color: Colors.black12),
+            SizedBox(height: 24.h),
             const Text(
-              "محرك الخرائط السيادي نشط",
-              style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black26),
+              "Global Geo-Node Active",
+              style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black26, letterSpacing: 2),
             ),
           ],
         ),
@@ -61,60 +61,60 @@ class TrackingScreen extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(40.r)),
-            boxShadow: [BoxShadow(color: Colors.black.withAlpha(26), blurRadius: 20)],
+            borderRadius: BorderRadius.vertical(top: Radius.circular(50.r)),
+            boxShadow: [BoxShadow(color: Colors.black.withAlpha(26), blurRadius: 30)],
           ),
           child: ListView(
             controller: scrollController,
-            padding: EdgeInsets.all(30.w),
+            padding: EdgeInsets.all(32.w),
             children: [
               Center(
                 child: Container(
-                  width: 50.w,
-                  height: 5.h,
-                  decoration: BoxDecoration(color: Colors.black12, borderRadius: BorderRadius.circular(10.r)),
+                  width: 60.w,
+                  height: 6.h,
+                  decoration: BoxDecoration(color: Colors.slate-100, borderRadius: BorderRadius.circular(10.r)),
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 40.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(radius: 25.r, backgroundColor: AppTheme.primary.withAlpha(26), child: const Icon(Icons.person, color: AppTheme.primary)),
-                      SizedBox(width: 15.w),
+                      CircleAvatar(radius: 28.r, backgroundColor: AppTheme.primary.withAlpha(26), child: const Icon(Icons.local_shipping_outlined, color: AppTheme.primary)),
+                      SizedBox(width: 20.w),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("أحمد منصور", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16)),
-                          Text("مندوب التوصيل • سيارة بيضاء", style: TextStyle(color: Colors.black38, fontSize: 10.sp, fontWeight: FontWeight.bold)),
+                          const Text("A. Mansour", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+                          Text("Enterprise Logistics • Node #01", style: TextStyle(color: Colors.black38, fontSize: 10.sp, fontWeight: FontWeight.black, uppercase: true)),
                         ],
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      _buildContactButton(Icons.phone, AppTheme.success),
-                      SizedBox(width: 10.w),
-                      _buildContactButton(Icons.chat, AppTheme.primary),
+                      _buildContactButton(Icons.call, AppTheme.success),
+                      SizedBox(width: 12.w),
+                      _buildContactButton(Icons.chat_bubble_outline, AppTheme.primary),
                     ],
                   ),
                 ],
               ),
               SizedBox(height: 40.h),
-              const Divider(color: Colors.black12),
-              SizedBox(height: 30.h),
+              const Divider(color: Colors.black.withAlpha(13)),
+              SizedBox(height: 40.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("حالة الشحنة", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
-                  Text("يصل خلال 15 دقيقة", style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 12.sp)),
+                  const Text("Fulfillment Status", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20, letterSpacing: -0.5)),
+                  Text("ETA: 15 MIN", style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 12.sp, tracking: 1)),
                 ],
               ),
-              SizedBox(height: 30.h),
-              _buildTimelineTile("تم الاستلام", "10:15 AM", isPast: true),
-              _buildTimelineTile("في الطريق إليك", "11:02 AM", isPast: true, isCurrent: true),
-              _buildTimelineTile("تم التسليم", "متوقع قريباً", isPast: false),
+              SizedBox(height: 40.h),
+              _buildTimelineTile("Package Dispatched", "10:15 AM", isPast: true),
+              _buildTimelineTile("Out for Delivery", "11:02 AM", isPast: true, isCurrent: true),
+              _buildTimelineTile("Final Handover", "Pending", isPast: false),
             ],
           ),
         );
@@ -124,41 +124,41 @@ class TrackingScreen extends StatelessWidget {
 
   Widget _buildContactButton(IconData icon, Color color) {
     return Container(
-      padding: EdgeInsets.all(12.w),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: color.withAlpha(26),
-        borderRadius: BorderRadius.circular(15.r),
+        borderRadius: BorderRadius.circular(18.r),
       ),
-      child: Icon(icon, color: color, size: 20),
+      child: Icon(icon, color: color, size: 22),
     );
   }
 
   Widget _buildTimelineTile(String title, String time, {required bool isPast, bool isCurrent = false}) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           children: [
             Container(
-              width: 20.w,
-              height: 20.h,
+              width: 22.w,
+              height: 22.h,
               decoration: BoxDecoration(
-                color: isCurrent ? AppTheme.primary : (isPast ? AppTheme.primary.withAlpha(51) : Colors.black12),
+                color: isCurrent ? AppTheme.primary : (isPast ? AppTheme.primary.withAlpha(51) : Colors.slate-100),
                 shape: BoxShape.circle,
                 border: isCurrent ? Border.all(color: Colors.white, width: 4) : null,
               ),
-              child: isCurrent ? null : (isPast ? const Icon(Icons.check, size: 12, color: AppTheme.primary) : null),
+              child: isCurrent ? null : (isPast ? const Icon(Icons.check, size: 14, color: AppTheme.primary) : null),
             ),
-            Container(width: 2.w, height: 40.h, color: isPast ? AppTheme.primary.withAlpha(51) : Colors.black12),
+            if (title != "Final Handover") Container(width: 2.w, height: 50.h, color: isPast ? AppTheme.primary.withAlpha(51) : Colors.slate-100),
           ],
         ),
-        SizedBox(width: 20.w),
+        SizedBox(width: 24.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp, color: isPast ? Colors.black87 : Colors.black26)),
-              Text(time, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.bold)),
-              SizedBox(height: 25.h),
+              Text(title, style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15.sp, color: isPast ? Colors.black87 : Colors.black26)),
+              Text(time, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.black, uppercase: true)),
             ],
           ),
         ),

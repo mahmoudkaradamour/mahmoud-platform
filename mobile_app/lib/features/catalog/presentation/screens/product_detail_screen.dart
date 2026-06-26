@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Immersive Product Details Screen.
-/// Includes AR Visualization trigger and high-fidelity specifications.
+/// Elite Asset Detail View.
+/// High-fidelity immersion with integrated AR visualization.
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
 
@@ -14,31 +14,33 @@ class ProductDetailScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 400.h,
+            expandedHeight: 450.h,
             pinned: true,
+            stretch: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: AppTheme.background,
                 child: Stack(
                   children: [
-                    const Center(child: Icon(Icons.shopping_bag, size: 120, color: Colors.black12)),
+                    const Center(child: Icon(Icons.inventory_2_outlined, size: 140, color: Colors.black12)),
                     Positioned(
-                      bottom: 30.h,
-                      right: 20.w,
+                      bottom: 40.h,
+                      right: 32.w,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                         decoration: BoxDecoration(
-                          color: Colors.black.withAlpha(204),
-                          borderRadius: BorderRadius.circular(20.r),
+                          color: Colors.slate-900.withAlpha(230),
+                          borderRadius: BorderRadius.circular(24.r),
                           border: Border.all(color: Colors.white.withAlpha(26)),
+                          boxShadow: [BoxShadow(color: Colors.black.withAlpha(51), blurRadius: 40)],
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.view_in_ar, color: AppTheme.secondary, size: 20),
-                            SizedBox(width: 10.w),
+                            const Icon(Icons.view_in_ar_outlined, color: AppTheme.secondary, size: 24),
+                            SizedBox(width: 12.w),
                             Text(
-                              "عرض بتقنية AR",
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 12.sp),
+                              "Initiate AR View",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 13.sp, uppercase: true, tracking: 1),
                             ),
                           ],
                         ),
@@ -51,7 +53,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(24.w),
+              padding: EdgeInsets.all(32.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -59,56 +61,63 @@ class ProductDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
                         decoration: BoxDecoration(
                           color: AppTheme.primary.withAlpha(26),
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
-                          "منتج سيادي",
-                          style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 10.sp),
+                          "Enterprise Certified",
+                          style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 10.sp, uppercase: true, tracking: 1),
                         ),
                       ),
-                      const Icon(Icons.favorite_border, color: AppTheme.error),
+                      IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline, color: AppTheme.error)),
                     ],
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 24.h),
                   Text(
-                    "هاتف آيفون 15 برو ماكس",
-                    style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w900, color: Colors.black),
+                    "iPhone 15 Pro Max",
+                    style: TextStyle(fontSize: 34.sp, fontWeight: FontWeight.w900, color: Colors.slate-900, letterSpacing: -1.5),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 12.h),
                   Text(
-                    "التيتانيوم الأزرق، 256 جيجابايت",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.black45, fontWeight: FontWeight.bold),
+                    "Natural Titanium • 1TB Institutional Grade",
+                    style: TextStyle(fontSize: 16.sp, color: Colors.slate-500, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 48.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("السعر الحالي", style: TextStyle(color: Colors.black26, fontWeight: FontWeight.bold)),
-                          Text("\$1200", style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w900, color: AppTheme.primary)),
+                          const Text("Market Valuation", style: TextStyle(color: Colors.slate-400, fontWeight: FontWeight.black, fontSize: 11, uppercase: true, tracking: 1)),
+                          Text("\$1,599.00", style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.w900, color: AppTheme.primary, letterSpacing: -1)),
                         ],
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+                        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
                         decoration: BoxDecoration(
                           color: AppTheme.success.withAlpha(26),
-                          borderRadius: BorderRadius.circular(12.r),
+                          borderRadius: BorderRadius.circular(16.r),
                         ),
-                        child: Text("متوفر في المخزن", style: TextStyle(color: AppTheme.success, fontWeight: FontWeight.w900, fontSize: 12.sp)),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.check_circle_outline, color: AppTheme.success, size: 16),
+                            SizedBox(width: 8.w),
+                            Text("Ready", style: TextStyle(color: AppTheme.success, fontWeight: FontWeight.w900, fontSize: 12.sp, uppercase: true)),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 40.h),
-                  Text("المواصفات التقنية", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900)),
-                  SizedBox(height: 20.h),
-                  _buildSpecItem("المعالج", "A17 Pro Chip"),
-                  _buildSpecItem("الكاميرا", "48MP Main | Ultra Wide"),
-                  _buildSpecItem("الشاشة", "6.7-inch Super Retina XDR"),
+                  SizedBox(height: 56.h),
+                  const Text("Technical Parameters", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
+                  SizedBox(height: 24.h),
+                  _buildInstitutionalSpec("Silicon", "A17 Pro Cluster"),
+                  _buildInstitutionalSpec("Imaging", "48MP Phase Detect AF"),
+                  _buildInstitutionalSpec("Interface", "USB-C High Speed Node"),
+                  _buildInstitutionalSpec("Network", "5G Global Protocol"),
                 ],
               ),
             ),
@@ -116,33 +125,41 @@ class ProductDetailScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(24.w),
+        padding: EdgeInsets.all(32.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black.withAlpha(13), blurRadius: 20, offset: const Offset(0, -10))],
+          border: Border.at(top: BorderSide(color: Colors.slate-50)),
+          boxShadow: [BoxShadow(color: Colors.black.withAlpha(8), blurRadius: 30, offset: const Offset(0, -10))],
         ),
         child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppTheme.primary,
+            backgroundColor: Colors.slate-900,
             foregroundColor: Colors.white,
-            minimumSize: Size(double.infinity, 70.h),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+            minimumSize: Size(double.infinity, 75.h),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.r)),
+            elevation: 15,
+            shadowColor: Colors.black.withAlpha(77),
           ),
-          child: Text("أضف إلى السلة", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900)),
+          child: Text("Initiate Acquisition", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, uppercase: true, tracking: 1)),
         ),
       ),
     );
   }
 
-  Widget _buildSpecItem(String key, String value) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 12.h),
+  Widget _buildInstitutionalSpec(String key, String value) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: Colors.slate-50,
+        borderRadius: BorderRadius.circular(22.r),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(key, style: const TextStyle(color: Colors.black45, fontWeight: FontWeight.bold)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.black87)),
+          Text(key, style: const TextStyle(color: Colors.slate-400, fontWeight: FontWeight.black, fontSize: 12, uppercase: true)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.slate-800, fontSize: 14)),
         ],
       ),
     );

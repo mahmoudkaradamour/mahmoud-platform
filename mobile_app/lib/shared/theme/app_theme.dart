@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Sovereign App Theme Configuration.
-/// Aligns with the global Design System tokens.
+/// Enterprise App Theme Configuration.
+/// Aligns with global institutional design standards.
 /// Focused on ZCL (Zero Cognitive Load) and High-Fidelity UX.
 class AppTheme {
   static const Color primary = Color(0xFF0A84FF);
@@ -12,7 +12,7 @@ class AppTheme {
   static const Color error = Color(0xFFFF3B30);
   static const Color success = Color(0xFF34C759);
   static const Color warning = Color(0xFFFFCC00);
-  static const Color sovereignGold = Color(0xFFD4AF37);
+  static const Color enterpriseGold = Color(0xFFD4AF37);
 
   static ThemeData get lightTheme {
     return ThemeData(

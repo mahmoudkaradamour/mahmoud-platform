@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Mobile Login Interface - ZCL Architecture.
-/// Designed to meet Apple/Google premium store standards.
+/// Institutional Login Interface.
+/// Designed for high-fidelity corporate aesthetic and ZCL (Zero Cognitive Load).
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -51,39 +51,42 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.shield_outlined, size: 60, color: AppTheme.primary),
+                    child: const Icon(Icons.security, size: 60, color: AppTheme.primary),
                   ),
                 ),
                 SizedBox(height: 40.h),
                 Text(
-                  "مرحباً بك مجدداً",
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 32.sp),
+                  "Institutional Access",
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 32.sp, fontWeight: FontWeight.w900, tracking: -1),
                 ),
                 Text(
-                  "سجل دخولك للوصول إلى محفظتك وعروضك",
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  "Establish a secure connection to the global ledger.",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 40.h),
+
                 _buildTextField(
                   controller: _emailController,
-                  label: "البريد الإلكتروني",
+                  label: "Work Email",
                   icon: Icons.alternate_email,
                 ),
                 SizedBox(height: 20.h),
                 _buildTextField(
                   controller: _passwordController,
-                  label: "كلمة المرور",
+                  label: "Access Key",
                   icon: Icons.lock_outline,
                   isPassword: true,
                 ),
+
                 SizedBox(height: 12.h),
                 Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {},
-                    child: const Text("نسيت كلمة المرور؟", style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: const Text("Reset Credentials", style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)),
                   ),
                 ),
+
                 SizedBox(height: 30.h),
                 ElevatedButton(
                   onPressed: () {},
@@ -96,18 +99,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     shadowColor: AppTheme.primary.withAlpha(102),
                   ),
                   child: Text(
-                    "تسجيل الدخول",
-                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900),
+                    "Authorize Session",
+                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w900, letterSpacing: 1),
                   ),
                 ),
+
                 SizedBox(height: 40.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("ليس لديك حساب؟"),
+                    const Text("New Institution?"),
                     TextButton(
                       onPressed: () {},
-                      child: const Text("انضم الآن", style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)),
+                      child: const Text("Request Onboarding", style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)),
                     ),
                   ],
                 ),
@@ -136,8 +140,10 @@ class _LoginScreenState extends State<LoginScreen> {
       child: TextField(
         controller: controller,
         obscureText: isPassword,
+        style: const TextStyle(fontWeight: FontWeight.bold),
         decoration: InputDecoration(
           labelText: label,
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
           prefixIcon: Icon(icon, color: AppTheme.primary, size: 22),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(24.r), borderSide: BorderSide.none),
           filled: true,

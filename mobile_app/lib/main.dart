@@ -8,26 +8,24 @@ import 'package:mobile_app/features/catalog/presentation/screens/catalog_screen.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // High-Level Security Checklist
   bool isSecure = true; 
   try {
     final integrity = await PlatformChannel.isEnvironmentSecure();
     final installerValid = await AppHardener.isInstallationSourceValid();
     final tamperingDetected = await AppHardener.isTamperingDetected();
     
-    // Decisions made here in Native/Core
     isSecure = integrity && installerValid && !tamperingDetected;
   } catch (e) {
     isSecure = false;
   }
   
-  runApp(MahmoudPlatformApp(isSecure: isSecure));
+  runApp(MahmoudEnterpriseApp(isSecure: isSecure));
 }
 
-class MahmoudPlatformApp extends StatelessWidget {
+class MahmoudEnterpriseApp extends StatelessWidget {
   final bool isSecure;
   
-  const MahmoudPlatformApp({super.key, required this.isSecure});
+  const MahmoudEnterpriseApp({super.key, required this.isSecure});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class MahmoudPlatformApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return MaterialApp(
-          title: 'Mahmoud Sovereign Platform',
+          title: 'Mahmoud Enterprise Platform',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           builder: (context, widget) {
@@ -44,7 +42,7 @@ class MahmoudPlatformApp extends StatelessWidget {
               return const Scaffold(
                 body: Center(
                   child: Text(
-                    "بيئة التشغيل غير آمنة أو التطبيق معدل. تم الإيقاف حمايةً لبياناتك.",
+                    "Environment compromised or app tampered. Terminating session for your protection.",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w900, color: Colors.red),
                   ),
@@ -52,7 +50,7 @@ class MahmoudPlatformApp extends StatelessWidget {
               );
             }
             return Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr, // Primary: English
               child: widget!,
             );
           },
@@ -118,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     shape: BoxShape.circle,
                     border: Border.all(color: AppTheme.primary.withAlpha(128), width: 2),
                  ),
-                 child: const Icon(Icons.shield_outlined, size: 80, color: AppTheme.primary),
+                 child: const Icon(Icons.security, size: 80, color: AppTheme.primary),
               ),
               const SizedBox(height: 40),
               const Text(
@@ -126,13 +124,13 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 42,
-                  fontWeight: FontWeight.w900, // Fixed FontWeight.black
+                  fontWeight: FontWeight.w900,
                   letterSpacing: 8,
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                "SOVEREIGN ECOSYSTEM",
+              const Text(
+                "ENTERPRISE ECOSYSTEM",
                 style: TextStyle(
                   color: AppTheme.primary,
                   fontSize: 12,

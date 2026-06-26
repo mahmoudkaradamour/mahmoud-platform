@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 import 'package:mobile_app/features/catalog/presentation/screens/product_detail_screen.dart';
 
-/// Mobile Catalog Discovery Screen.
-/// Enhanced with AI Recommendations "For You" section.
+/// Enterprise Catalog Discovery Screen.
+/// Optimized for high-frequency trading and ZCL (Zero Cognitive Load).
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
 
@@ -12,7 +12,7 @@ class CatalogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("اكتشف المنصة السيادية"),
+        title: const Text("Discover Platform"),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.notifications_none, color: Colors.black)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black)),
@@ -22,10 +22,10 @@ class CatalogScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildRecommendationsSection(context),
+            _buildPersonalizedSection(context),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
-              child: const Text("كل المنتجات", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+              child: const Text("Marketplace Inventory", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
             ),
             GridView.builder(
               shrinkWrap: true,
@@ -48,7 +48,7 @@ class CatalogScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRecommendationsSection(BuildContext context) {
+  Widget _buildPersonalizedSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -57,8 +57,8 @@ class CatalogScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("مختارات لك (AI)", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: AppTheme.primary)),
-              TextButton(onPressed: () {}, child: const Text("المزيد")),
+              const Text("Picked For You (AI)", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: AppTheme.primary)),
+              TextButton(onPressed: () {}, child: const Text("View All")),
             ],
           ),
         ),
@@ -117,9 +117,9 @@ class CatalogScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("إلكترونيات", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.black26)),
+                  Text("Electronics", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.black26)),
                   SizedBox(height: 4.h),
-                  const Text("آيفون 15 برو", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold), maxLines: 1),
+                  const Text("iPhone 15 Pro", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold), maxLines: 1),
                   SizedBox(height: 12.h),
                   Text("\$1200", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, color: AppTheme.primary)),
                 ],

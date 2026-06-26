@@ -11,17 +11,21 @@ const config: Config = {
       colors: {
         primary: "#0A84FF",
         secondary: "#30B0C7",
-        background: "#F2F2F7",
+        background: "#F8FAFC",
         surface: "#FFFFFF",
-        error: "#FF3B30",
-        success: "#34C759",
-        "sovereign-gold": "#D4AF37",
+        error: "#EF4444",
+        success: "#10B981",
+        "enterprise-gold": "#D4AF37",
       },
       fontFamily: {
-        cairo: ["var(--font-cairo)", "sans-serif"],
+        cairo: ["var(--font-cairo)"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;

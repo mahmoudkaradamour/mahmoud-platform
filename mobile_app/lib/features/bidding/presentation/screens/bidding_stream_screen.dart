@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Bidding Stream Screen - Enterprise Resilience Edition.
-/// Implements Backpressure Handling (Throttling) to survive 10k+ concurrent events.
+/// Market Live Stream.
+/// Institutional quote dissemination with high-frequency updates.
 class BiddingStreamScreen extends StatefulWidget {
   const BiddingStreamScreen({super.key});
 
@@ -19,17 +19,13 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
   @override
   void initState() {
     super.initState();
-    // Simulate high-frequency WebSocket stream
-    _startSovereignStream();
+    _startInstitutionalStream();
   }
 
-  void _startSovereignStream() {
-    // 1. Backpressure Handling: Don't update UI for every packet.
-    // Batch updates every 800ms to save CPU/Memory on weak devices.
+  void _startInstitutionalStream() {
     _throttleTimer = Timer.periodic(const Duration(milliseconds: 800), (timer) {
       if (_bufferedQuotes.isNotEmpty) {
         setState(() {
-          // Process buffer...
           _bufferedQuotes.clear();
         });
       }
@@ -45,25 +41,79 @@ class _BiddingStreamScreenState extends State<BiddingStreamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("عروض التجار الحية")),
+      appBar: AppBar(title: const Text("Institutional Live Quotes")),
       body: ListView.builder(
-        padding: EdgeInsets.all(20.w),
+        padding: EdgeInsets.all(24.w),
         itemCount: 5,
-        itemBuilder: (context, index) => _buildQuoteCard(index),
+        itemBuilder: (context, index) => _buildInstitutionalQuoteCard(index),
       ),
     );
   }
 
-  Widget _buildQuoteCard(int index) {
+  Widget _buildInstitutionalQuoteCard(int index) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20.h),
+      margin: EdgeInsets.only(bottom: 24.h),
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(30.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20)],
+        borderRadius: BorderRadius.circular(32.r),
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20, offset: const Offset(0, 8))],
+        border: index == 0 ? Border.all(color: AppTheme.primary.withAlpha(51)) : null,
       ),
-      child: const Text("بيانات العرض المحصنة...", style: TextStyle(fontWeight: FontWeight.w900)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(radius: 24.r, backgroundColor: AppTheme.primary.withAlpha(26), child: const Icon(Icons.business_outlined, color: AppTheme.primary)),
+                  SizedBox(width: 16.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Tier-1 Partner", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15)),
+                      Text("Verified Network • Node #7", style: TextStyle(fontSize: 10.sp, color: Colors.slate-400, fontWeight: FontWeight.black, uppercase: true)),
+                    ],
+                  ),
+                ],
+              ),
+              if (index == 0) const Icon(Icons.verified_outlined, color: AppTheme.primary, size: 22),
+            ],
+          ),
+          SizedBox(height: 32.h),
+          Text(
+            "Inventory confirmed. Full institutional warranty and logic clearance provided.",
+            style: TextStyle(fontSize: 14.sp, color: Colors.slate-600, fontWeight: FontWeight.w500, height: 1.5),
+          ),
+          SizedBox(height: 32.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("STRIKE PRICE", style: TextStyle(color: Colors.slate-300, fontWeight: FontWeight.black, fontSize: 10, uppercase: true, tracking: 1)),
+                  Text("\$1,180.00", style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900, color: AppTheme.primary, letterSpacing: -1)),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primary,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+                  elevation: 8,
+                  shadowColor: AppTheme.primary.withAlpha(77),
+                ),
+                child: const Text("Execute Settlement", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, uppercase: true)),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Post Purchase Request Screen - Refactored for Flutter 3.x.
+/// Market Request Interface.
+/// Part of the Enterprise On-Demand Distribution system.
 class PostRequestScreen extends StatefulWidget {
   const PostRequestScreen({super.key});
 
@@ -19,7 +20,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("نشر طلب شراء"),
+        title: const Text("Launch Market Request"),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -30,54 +31,54 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionHeader("ما الذي تبحث عنه؟", "صف بدقة المنتج الذي تحتاجه للحصول على أفضل العروض"),
-            SizedBox(height: 30.h),
+            _buildSectionHeader("Asset Specification", "Define the inventory parameters for institutional bidding."),
+            SizedBox(height: 32.h),
             
-            _buildInputLabel("عنوان الطلب"),
-            _buildTextField(_titleController, "مثلاً: آيفون 15 برو ماكس تيتانيوم"),
+            _buildInputLabel("Request Identifier"),
+            _buildTextField(_titleController, "e.g., iPhone 15 Pro Max Titanium"),
             
-            SizedBox(height: 20.h),
-            _buildInputLabel("المواصفات المطلوبة"),
-            _buildTextField(_descController, "اكتب التفاصيل هنا (اللون، السعة، الضمان...)", maxLines: 5),
+            SizedBox(height: 24.h),
+            _buildInputLabel("Operational Specifications"),
+            _buildTextField(_descController, "Define technical requirements (Color, Capacity, Warranty)...", maxLines: 5),
             
-            SizedBox(height: 20.h),
-            _buildInputLabel("الميزانية المتوقعة (اختياري)"),
-            _buildTextField(_budgetController, "0.00", icon: Icons.attach_money, isNumeric: true),
+            SizedBox(height: 24.h),
+            _buildInputLabel("Target Capital Allocation (USD)"),
+            _buildTextField(_budgetController, "0.00", icon: Icons.monetization_on_outlined, isNumeric: true),
             
-            SizedBox(height: 40.h),
+            SizedBox(height: 48.h),
             Container(
-              padding: EdgeInsets.all(20.w),
+              padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
-                color: AppTheme.primary.withAlpha(13), // Fixed withAlpha
-                borderRadius: BorderRadius.circular(24.r),
+                color: AppTheme.primary.withAlpha(13),
+                borderRadius: BorderRadius.circular(32.r),
                 border: Border.all(color: AppTheme.primary.withAlpha(26)),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.gavel_rounded, color: AppTheme.primary),
-                  SizedBox(width: 15.w),
+                  const Icon(Icons.gavel_outlined, color: AppTheme.primary, size: 28),
+                  SizedBox(width: 20.w),
                   Expanded(
                     child: Text(
-                      "سيتم عرض طلبك على جميع التجار الموثقين وسوف تتلقى عروض أسعار تنافسية فوراً.",
-                      style: TextStyle(fontSize: 12.sp, color: Colors.black54, fontWeight: FontWeight.bold),
+                      "Your request will be dispatched to the verified institutional network. Expect competitive quotes within minutes.",
+                      style: TextStyle(fontSize: 12.sp, color: Colors.slate-600, fontWeight: FontWeight.bold, height: 1.5),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 40.h),
+            SizedBox(height: 48.h),
             
             ElevatedButton(
-              onPressed: () {
-                // Submit logic to Bidding Module
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.primary,
                 foregroundColor: Colors.white,
-                minimumSize: Size(double.infinity, 65.h),
+                minimumSize: Size(double.infinity, 70.h),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+                elevation: 10,
+                shadowColor: AppTheme.primary.withAlpha(77),
               ),
-              child: const Text("نشر الطلب الآن", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+              child: const Text("Execute Market Order", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, letterSpacing: 0.5)),
             ),
           ],
         ),
@@ -89,32 +90,41 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900, color: Colors.black)),
-        SizedBox(height: 4.h),
-        Text(subtitle, style: TextStyle(fontSize: 14.sp, color: Colors.black45, fontWeight: FontWeight.bold)),
+        Text(title, style: TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w900, color: Colors.slate-900, letterSpacing: -1)),
+        SizedBox(height: 6.h),
+        Text(subtitle, style: TextStyle(fontSize: 15.sp, color: Colors.slate-400, fontWeight: FontWeight.w500)),
       ],
     );
   }
 
   Widget _buildInputLabel(String label) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8.h, right: 4.w),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14)),
+      padding: EdgeInsets.only(bottom: 10.h, left: 4.w),
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, uppercase: true, color: Colors.slate-500, letterSpacing: 1)),
     );
   }
 
   Widget _buildTextField(TextEditingController controller, String hint, {int maxLines = 1, IconData? icon, bool isNumeric = false}) {
-    return TextField(
-      controller: controller,
-      maxLines: maxLines,
-      keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
-      decoration: InputDecoration(
-        hintText: hint,
-        prefixIcon: icon != null ? Icon(icon, color: AppTheme.primary) : null,
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.r), borderSide: const BorderSide(color: Colors.black12)),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20.r), borderSide: const BorderSide(color: Colors.black12)),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22.r),
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
+      ),
+      child: TextField(
+        controller: controller,
+        maxLines: maxLines,
+        keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: TextStyle(color: Colors.slate-300, fontWeight: FontWeight.normal),
+          prefixIcon: icon != null ? Icon(icon, color: AppTheme.primary, size: 20) : null,
+          filled: true,
+          fillColor: Colors.transparent,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(22.r), borderSide: BorderSide.none),
+          contentPadding: EdgeInsets.all(22.w),
+        ),
       ),
     );
   }

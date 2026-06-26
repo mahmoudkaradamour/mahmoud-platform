@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
-import "../../styles/globals.css";
+import "./globals.css";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import QueryProvider from "@/lib/providers/query-provider";
@@ -12,8 +12,8 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "Mahmoud Platform | Sovereign Commerce Ecosystem",
-  description: "Next-generation multi-vendor marketplace for MENA markets.",
+  title: "Mahmoud Enterprise | Global Distribution Ecosystem",
+  description: "Bank-grade multi-vendor e-commerce platform for international-scale commerce automation.",
 };
 
 function cn(...inputs: ClassValue[]) {
@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={cn(cairo.variable, "antialiased")}>
-      <body className="bg-background text-slate-900 font-cairo">
+    <html lang="en" dir="ltr" className={cn(cairo.variable, "antialiased")}>
+      <body className="bg-background text-slate-900 font-sans">
         <QueryProvider>
           <main className="min-h-screen">
             {children}

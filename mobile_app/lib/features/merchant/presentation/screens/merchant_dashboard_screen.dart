@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Mobile Merchant Command Center.
-/// Provides high-level metrics and quick access to inventory, orders, and live streaming.
+/// Enterprise Merchant Command Center.
+/// High-fidelity analytics and operational control.
 class MerchantDashboardScreen extends StatelessWidget {
   const MerchantDashboardScreen({super.key});
 
@@ -21,11 +21,11 @@ class MerchantDashboardScreen extends StatelessWidget {
                 children: [
                   _buildStatsGrid(),
                   SizedBox(height: 40.h),
-                  _buildSectionTitle("الأدوات السيادية"),
+                  _buildSectionTitle("Management Protocols"),
                   SizedBox(height: 20.h),
                   _buildQuickActions(context),
                   SizedBox(height: 40.h),
-                  _buildSectionTitle("الطلبات النشطة"),
+                  _buildSectionTitle("Active Fulfillment"),
                   SizedBox(height: 20.h),
                   _buildActiveOrdersList(),
                 ],
@@ -39,18 +39,19 @@ class MerchantDashboardScreen extends StatelessWidget {
 
   Widget _buildSliverAppBar() {
     return SliverAppBar(
-      expandedHeight: 180.h,
+      expandedHeight: 200.h,
       floating: false,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
+        titlePadding: EdgeInsets.only(left: 24.w, bottom: 20.h),
         title: Text(
-          "لوحة تحكم التاجر",
-          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18.sp, color: Colors.white),
+          "Control Center",
+          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 22.sp, color: Colors.white, letterSpacing: -1),
         ),
         background: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [AppTheme.primary, AppTheme.secondary],
+              colors: [Color(0xFF0F172A), Color(0xFF1E293B)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -58,9 +59,9 @@ class MerchantDashboardScreen extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(
-                right: -20,
-                bottom: -20,
-                child: Icon(Icons.storefront, size: 150, color: Colors.white.withAlpha(26)),
+                right: -40,
+                bottom: -40,
+                child: Icon(Icons.analytics, size: 240, color: Colors.white.withAlpha(13)),
               ),
             ],
           ),
@@ -74,51 +75,51 @@ class MerchantDashboardScreen extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
-      childAspectRatio: 1.5,
+      childAspectRatio: 1.4,
       crossAxisSpacing: 15.w,
       mainAxisSpacing: 15.h,
       children: [
-        _buildStatCard("مبيعات اليوم", "\$2,450", Icons.trending_up, AppTheme.success),
-        _buildStatCard("طلبات معلقة", "12", Icons.pending_actions, AppTheme.warning),
-        _buildStatCard("إجمالي المنتجات", "154", Icons.inventory_2_outlined, AppTheme.primary),
-        _buildStatCard("تقييم المتجر", "4.9", Icons.star_border, AppTheme.sovereignGold),
+        _buildStatCard("Daily Yield", "\$2,450", Icons.trending_up, AppTheme.success),
+        _buildStatCard("Pending Clear", "12", Icons.hourglass_empty, AppTheme.warning),
+        _buildStatCard("Total Inventory", "154", Icons.layers_outlined, AppTheme.primary),
+        _buildStatCard("Network Rating", "4.9", Icons.verified_user_outlined, AppTheme.enterpriseGold),
       ],
     );
   }
 
   Widget _buildStatCard(String label, String value, IconData icon, Color color) {
     return Container(
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10)],
+        borderRadius: BorderRadius.circular(30.r),
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, color: color, size: 20),
-          SizedBox(height: 8.h),
-          Text(value, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900)),
-          Text(label, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.bold)),
+          SizedBox(height: 10.h),
+          Text(value, style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, color: Colors.black87)),
+          Text(label, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.black, uppercase: true, letterSpacing: 0.5)),
         ],
       ),
     );
   }
 
   Widget _buildSectionTitle(String title) {
-    return Text(title, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900));
+    return Text(title, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, letterSpacing: -0.5));
   }
 
   Widget _buildQuickActions(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildActionItem(Icons.videocam_outlined, "بث مباشر", AppTheme.error),
-        _buildActionItem(Icons.add_box_outlined, "أضف منتج", AppTheme.primary),
-        _buildActionItem(Icons.people_outline, "الموظفين", Colors.black87),
-        _buildActionItem(Icons.settings_outlined, "الإعدادات", Colors.black45),
+        _buildActionItem(Icons.videocam_outlined, "Stream", AppTheme.error),
+        _buildActionItem(Icons.add_business_outlined, "Inventory", AppTheme.primary),
+        _buildActionItem(Icons.badge_outlined, "Staff", Colors.black87),
+        _buildActionItem(Icons.tune_outlined, "Settings", Colors.black45),
       ],
     );
   }
@@ -127,15 +128,16 @@ class MerchantDashboardScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(16.w),
+          padding: EdgeInsets.all(18.w),
           decoration: BoxDecoration(
-            color: color.withAlpha(26),
-            borderRadius: BorderRadius.circular(20.r),
+            color: color.withAlpha(13),
+            borderRadius: BorderRadius.circular(22.r),
+            border: Border.all(color: color.withAlpha(26)),
           ),
           child: Icon(icon, color: color, size: 28),
         ),
-        SizedBox(height: 10.h),
-        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900)),
+        SizedBox(height: 12.h),
+        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900, color: Colors.black87)),
       ],
     );
   }
@@ -148,26 +150,30 @@ class MerchantDashboardScreen extends StatelessWidget {
       separatorBuilder: (context, index) => SizedBox(height: 15.h),
       itemBuilder: (context, index) {
         return Container(
-          padding: EdgeInsets.all(20.w),
+          padding: EdgeInsets.all(24.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(25.r),
+            borderRadius: BorderRadius.circular(30.r),
             border: Border.all(color: Colors.black.withAlpha(5)),
           ),
           child: Row(
             children: [
-              CircleAvatar(backgroundColor: AppTheme.background, child: const Icon(Icons.shopping_bag_outlined, color: Colors.black26)),
-              SizedBox(width: 15.w),
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: AppTheme.background, 
+                child: const Icon(Icons.inventory_2_outlined, color: Colors.black26)
+              ),
+              SizedBox(width: 20.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("طلب #9821 - سامر حسن", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp)),
-                    Text("آيفون 15 برو • بانتظار التجهيز", style: TextStyle(color: Colors.black26, fontSize: 10.sp, fontWeight: FontWeight.bold)),
+                    Text("Entry #9821 - S. Hassan", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp)),
+                    Text("SKU: IP15-PRO • Processing", style: TextStyle(color: Colors.black26, fontSize: 10.sp, fontWeight: FontWeight.black, uppercase: true)),
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_back_ios_new, size: 14, color: Colors.black12),
+              const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.black12),
             ],
           ),
         );

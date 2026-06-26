@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/// Elite Account Management Interface.
-/// Handles high-security lifecycle actions: MFA, Deletion, and Language.
+/// Elite Account Management.
+/// Controls institutional lifecycle, security, and global preferences.
 class AccountSettingsScreen extends StatefulWidget {
   const AccountSettingsScreen({super.key});
 
@@ -12,103 +12,110 @@ class AccountSettingsScreen extends StatefulWidget {
 }
 
 class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
-  bool _mfaEnabled = false;
+  bool _mfaEnabled = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("إعدادات الحساب السيادي")),
+      appBar: AppBar(title: const Text("Enterprise Account Hub")),
       body: ListView(
-        padding: EdgeInsets.all(24.w),
+        padding: EdgeInsets.all(32.w),
         children: [
-          _buildSectionHeader("الأمان والمصادقة"),
-          _buildSettingTile(
-            title: "المصادقة الثنائية (2FA)",
-            subtitle: "تأمين الدخول عبر رمز بريدي أو تطبيق مصادقة",
+          _buildInstitutionalHeader("Cybersecurity & Identity"),
+          _buildEliteSettingTile(
+            title: "Multi-Factor Protocol (MFA)",
+            subtitle: "Authorized TOTP / Institutional Email sync",
             trailing: Switch(
               value: _mfaEnabled,
               onChanged: (val) => setState(() => _mfaEnabled = val),
               activeColor: AppTheme.primary,
             ),
           ),
-          _buildSettingTile(
-            title: "تغيير كلمة المرور",
-            subtitle: "تحديث مفاتيح الوصول الخاصة بك",
+          _buildEliteSettingTile(
+            title: "Access Key Rotation",
+            subtitle: "Update your institutional encryption keys",
+            icon: Icons.vpn_key_outlined,
             onTap: () {},
           ),
           
-          SizedBox(height: 40.h),
-          _buildSectionHeader("التفضيلات واللغة"),
-          _buildSettingTile(
-            title: "لغة التطبيق",
-            subtitle: "العربية (الافتراضية)",
+          SizedBox(height: 56.h),
+          _buildInstitutionalHeader("Localization & Hub Settings"),
+          _buildEliteSettingTile(
+            title: "Active Protocol Language",
+            subtitle: "English (Global Standard v1.0)",
+            icon: Icons.translate_outlined,
             onTap: () {},
           ),
-          _buildSettingTile(
-            title: "المظهر (Theme)",
-            subtitle: "النظام السيادي الموحد",
+          _buildEliteSettingTile(
+            title: "System Surface (Theme)",
+            subtitle: "Standard Enterprise Interface",
+            icon: Icons.dark_mode_outlined,
             onTap: () {},
           ),
 
-          SizedBox(height: 40.h),
-          _buildSectionHeader("إدارة الهوية"),
-          _buildSettingTile(
-            title: "إيقاف الحساب مؤقتاً",
-            subtitle: "تجميد النشاط التجاري والمالي لفترة محددة",
-            icon: Icons.pause_circle_outline,
-            onTap: () => _confirmAction(context, "إيقاف مؤقت"),
+          SizedBox(height: 56.h),
+          _buildInstitutionalHeader("Lifecycle Control"),
+          _buildEliteSettingTile(
+            title: "Account Suspension",
+            subtitle: "Temporarily freeze all liquid asset activity",
+            icon: Icons.pause_circle_filled_outlined,
+            onTap: () => _confirmInstitutionalAction(context, "Suspension"),
           ),
-          _buildSettingTile(
-            title: "حذف الحساب نهائياً",
-            subtitle: "مسح كافة البيانات (سيتم الاحتفاظ بالسجلات الجنائية)",
-            icon: Icons.delete_forever_outlined,
+          _buildEliteSettingTile(
+            title: "Terminate Repository",
+            subtitle: "Wipe instance data (Audit logs retained for compliance)",
+            icon: Icons.delete_sweep_outlined,
             color: AppTheme.error,
-            onTap: () => _confirmAction(context, "حذف نهائي"),
+            onTap: () => _confirmInstitutionalAction(context, "Termination"),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSectionHeader(String title) {
+  Widget _buildInstitutionalHeader(String title) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 20.h, top: 10.h),
-      child: Text(title, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, color: AppTheme.primary)),
+      padding: EdgeInsets.only(bottom: 24.h, left: 4.w),
+      child: Text(title, style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.black, color: AppTheme.primary, uppercase: true, tracking: 2)),
     );
   }
 
-  Widget _buildSettingTile({required String title, required String subtitle, Widget? trailing, IconData? icon, Color? color, VoidCallback? onTap}) {
+  Widget _buildEliteSettingTile({required String title, required String subtitle, Widget? trailing, IconData? icon, Color? color, VoidCallback? onTap}) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15.h),
-      padding: EdgeInsets.all(20.w),
+      margin: EdgeInsets.only(bottom: 20.h),
+      padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(25.r),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10)],
+        borderRadius: BorderRadius.circular(32.r),
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20, offset: const Offset(0, 8))],
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         onTap: onTap,
-        leading: icon != null ? Icon(icon, color: color ?? Colors.black45) : null,
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.w900, color: color ?? Colors.black87)),
-        subtitle: Text(subtitle, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.bold)),
-        trailing: trailing ?? const Icon(Icons.arrow_back_ios_new, size: 14, color: Colors.black12),
+        leading: icon != null ? Icon(icon, color: color ?? Colors.slate-400, size: 28) : null,
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.w900, color: color ?? Colors.slate-900, fontSize: 16.sp)),
+        subtitle: Padding(
+          padding: EdgeInsets.only(top: 4.h),
+          child: Text(subtitle, style: TextStyle(fontSize: 11.sp, color: Colors.slate-400, fontWeight: FontWeight.w600)),
+        ),
+        trailing: trailing ?? const Icon(Icons.chevron_right, size: 18, color: Colors.slate-200),
       ),
     );
   }
 
-  void _confirmAction(BuildContext context, String action) {
+  void _confirmInstitutionalAction(BuildContext context, String action) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("تأكيد $action"),
-        content: Text("هل أنت متأكد من القيام بعملية $action؟ لا يمكن التراجع عن بعض هذه الإجراءات."),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.r)),
+        title: Text("Confirm Institutional $action", style: const TextStyle(fontWeight: FontWeight.w900)),
+        content: Text("Execute the $action protocol? This action will be recorded in the forensic ledger."),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("إلغاء")),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text("ABORT", style: TextStyle(fontWeight: FontWeight.black, color: Colors.slate-400))),
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.error, foregroundColor: Colors.white),
-            child: const Text("تأكيد"),
+            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.error, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r))),
+            child: const Text("EXECUTE", style: TextStyle(fontWeight: FontWeight.w900)),
           ),
         ],
       ),

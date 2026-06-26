@@ -1,24 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import apiClient from "@/lib/api-client";
 import { useRouter } from "next/navigation";
-import { User, Mail, Lock, Store, Loader2, AlertCircle } from "lucide-react";
+import { User, Mail, Lock, Loader2, AlertCircle, ArrowRight, ShieldCheck, FileUp } from "lucide-react";
+import Link from "next/link";
+import apiClient from "@/lib/api-client";
 
 /**
- * Register Page - Multi-vendor Onboarding.
- * Supports different account types (Customer/Seller).
+ * Institutional Onboarding Interface.
+ * Modern registration with secure entity verification.
  */
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    account_type: "CUSTOMER",
+    account_type: "CUSTOMER"
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
   const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -32,112 +32,136 @@ export default function RegisterPage() {
         router.push("/auth/login?registered=true");
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || "فشل إنشاء الحساب. يرجى التأكد من البيانات.");
+      setError(err.response?.data?.message || "Entity onboarding failed. Please verify your data.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-lg glass-effect p-8 rounded-3xl shadow-2xl">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold mb-2">انضم إلينا</h1>
-          <p className="text-slate-500">أنشئ حسابك لبدء تجربة التجارة السيادية</p>
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 antialiased">
+      <div className="w-full max-w-5xl grid lg:grid-cols-2 bg-white rounded-[60px] shadow-3xl overflow-hidden border border-slate-100">
+
+        {/* 📋 Visual Context Side */}
+        <div className="p-16 bg-slate-900 text-white flex flex-col justify-between relative overflow-hidden hidden lg:flex">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+
+          <Link href="/" className="relative z-10 text-2xl font-black italic tracking-tighter uppercase">
+            MAHMOUD <span className="text-primary underline">ENTERPRISE</span>
+          </Link>
+
+          <div className="relative z-10">
+            <h2 className="text-5xl font-black mb-8 leading-tight">Institutional <br /> Onboarding.</h2>
+            <p className="text-lg text-slate-400 font-medium leading-relaxed">
+              Join the distributed commerce network. Secure your digital assets with bank-grade protocols.
+            </p>
+          </div>
+
+          <div className="relative z-10 flex items-center gap-6 opacity-30">
+            <ShieldCheck size={24} className="text-primary" />
+            <p className="text-[10px] font-black uppercase tracking-widest">Protocol Compliant via ISO/IEC 2026</p>
+          </div>
         </div>
 
-        {error && (
-          <div className="mb-6 p-4 bg-error/10 border border-error/20 text-error rounded-2xl flex items-center gap-3">
-            <AlertCircle size={20} />
-            <span className="text-sm font-bold">{error}</span>
+        {/* 🖊️ Registration Form Side */}
+        <div className="p-12 md:p-20 flex flex-col justify-center">
+          <div className="mb-12">
+            <h1 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">Onboard Entity</h1>
+            <p className="text-slate-500 font-bold">Establish your presence in the global distribution hub.</p>
           </div>
-        )}
 
-        <form onSubmit={handleRegister} className="space-y-5">
-          <div>
-            <label className="block text-sm font-bold mb-2 mr-1">الاسم الكامل</label>
-            <div className="relative">
-              <User className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-              <input
-                type="text"
-                required
-                className="w-full pr-12 pl-4 py-4 bg-background border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-all"
-                placeholder="محمود كرام"
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-              />
+          {error && (
+            <div className="mb-8 p-5 bg-rose-50 border border-rose-100 text-rose-600 rounded-2xl flex items-start gap-4">
+              <AlertCircle size={20} className="shrink-0 mt-0.5" />
+              <div className="text-sm font-bold">{error}</div>
             </div>
-          </div>
+          )}
 
-          <div>
-            <label className="block text-sm font-bold mb-2 mr-1">البريد الإلكتروني</label>
-            <div className="relative">
-              <Mail className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-              <input
-                type="email"
-                required
-                className="w-full pr-12 pl-4 py-4 bg-background border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-all"
-                placeholder="example@domain.com"
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-              />
+          <form onSubmit={handleRegister} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+               <button
+                 type="button"
+                 onClick={() => setFormData({...formData, account_type: 'CUSTOMER'})}
+                 className={`py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest border transition-all ${formData.account_type === 'CUSTOMER' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-400 border-slate-200'}`}
+               >
+                 Individual
+               </button>
+               <button
+                 type="button"
+                 onClick={() => setFormData({...formData, account_type: 'SELLER'})}
+                 className={`py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest border transition-all ${formData.account_type === 'SELLER' ? 'bg-primary text-white border-primary shadow-lg shadow-blue-500/20' : 'bg-white text-slate-400 border-slate-200'}`}
+               >
+                 Enterprise Partner
+               </button>
             </div>
-          </div>
 
-          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Entity Name</label>
+              <div className="relative">
+                <User className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                <input
+                  type="text"
+                  required
+                  className="input-field pl-16 !bg-slate-50"
+                  placeholder="Full Legal Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Communication Channel</label>
+              <div className="relative">
+                <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                <input
+                  type="email"
+                  required
+                  className="input-field pl-16 !bg-slate-50"
+                  placeholder="work@entity.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Access Protocol (Password)</label>
+              <div className="relative">
+                <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                <input
+                  type="password"
+                  required
+                  className="input-field pl-16 !bg-slate-50"
+                  placeholder="••••••••••••"
+                  value={formData.password}
+                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                />
+              </div>
+            </div>
+
             <button
-              type="button"
-              onClick={() => setFormData({...formData, account_type: "CUSTOMER"})}
-              className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${
-                formData.account_type === "CUSTOMER" ? "border-primary bg-primary/5" : "border-slate-100 hover:border-slate-200"
-              }`}
+              type="submit"
+              disabled={loading}
+              className="btn-primary w-full group !py-5 mt-6"
             >
-              <User size={24} className={formData.account_type === "CUSTOMER" ? "text-primary" : "text-slate-400"} />
-              <span className={`text-sm font-bold ${formData.account_type === "CUSTOMER" ? "text-primary" : "text-slate-600"}`}>مستهلك</span>
+              {loading ? <Loader2 className="animate-spin" /> : (
+                <>
+                  Initiate Onboarding
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </button>
-            <button
-              type="button"
-              onClick={() => setFormData({...formData, account_type: "SELLER"})}
-              className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${
-                formData.account_type === "SELLER" ? "border-primary bg-primary/5" : "border-slate-100 hover:border-slate-200"
-              }`}
-            >
-              <Store size={24} className={formData.account_type === "SELLER" ? "text-primary" : "text-slate-400"} />
-              <span className={`text-sm font-bold ${formData.account_type === "SELLER" ? "text-primary" : "text-slate-600"}`}>تاجر</span>
-            </button>
+          </form>
+
+          <div className="mt-12 text-center">
+            <p className="text-slate-500 font-bold">
+              Already have an active node?{" "}
+              <Link href="/auth/login" className="text-primary font-black hover:underline underline-offset-4">
+                Establish Link
+              </Link>
+            </p>
           </div>
-
-          <div>
-            <label className="block text-sm font-bold mb-2 mr-1">كلمة المرور</label>
-            <div className="relative">
-              <Lock className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-              <input
-                type="password"
-                required
-                className="w-full pr-12 pl-4 py-4 bg-background border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-all"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:shadow-lg hover:shadow-primary/30 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
-          >
-            {loading ? <Loader2 className="animate-spin" /> : "إنشاء الحساب"}
-          </button>
-        </form>
-
-        <div className="mt-8 text-center">
-          <p className="text-slate-500 text-sm">
-            لديك حساب بالفعل؟{" "}
-            <button onClick={() => router.push("/auth/login")} className="text-primary font-bold hover:underline">
-              سجل دخولك
-            </button>
-          </p>
         </div>
       </div>
     </div>
