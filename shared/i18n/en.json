@@ -1,0 +1,23 @@
+{
+  "common": {
+    "app_name": "Mahmoud Enterprise Platform",
+    "login": "Sign In",
+    "register": "Onboard",
+    "search_placeholder": "Search Global Inventory...",
+    "buy_now": "Acquire Now",
+    "add_to_cart": "Add to Ledger",
+    "currency": "USD",
+    "welcome_back": "Welcome Back",
+    "admin_panel": "Command Center"
+  },
+  "home": {
+    "hero_title": "The Future of Global Commerce",
+    "hero_subtitle": "Hardened digital infrastructure for modern markets.",
+    "featured_products": "Featured Assets"
+  },
+  "auth": {
+    "email_label": "Work Email",
+    "password_label": "Access Key",
+    "forgot_password": "Reset Credentials?"
+  }
+}

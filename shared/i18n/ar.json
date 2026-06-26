@@ -1,15 +1,23 @@
 {
-  "auth": {
+  "common": {
+    "app_name": "منصة محمود المؤسساتية",
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
-    "welcome": "مرحباً بك في منصة محمود"
+    "search_placeholder": "ابحث في المخزون العالمي...",
+    "buy_now": "شراء الآن",
+    "add_to_cart": "إضافة للسلة",
+    "currency": "دولار",
+    "welcome_back": "مرحباً بك مجدداً",
+    "admin_panel": "لوحة تحكم المدير"
   },
-  "catalog": {
-    "products": "المنتجات",
-    "add_to_cart": "إضافة للسلة"
+  "home": {
+    "hero_title": "مستقبل التجارة العالمية",
+    "hero_subtitle": "بنية تحتية رقمية محصنة بمعايير بنكية عالمية.",
+    "featured_products": "المنتجات المميزة"
   },
-  "bidding": {
-    "post_request": "نشر طلب شراء",
-    "submit_quote": "تقديم عرض سعر"
+  "auth": {
+    "email_label": "البريد الإلكتروني للعمل",
+    "password_label": "مفتاح الوصول",
+    "forgot_password": "نسيت كلمة المرور؟"
   }
 }
