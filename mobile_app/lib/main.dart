@@ -19,7 +19,8 @@ void main() async {
     isSecure = false;
   }
   
-  runApp(const MahmoudEnterpriseApp(isSecure: true)); // Dev mode: override for testing UI
+  // Use isSecure to gate application launch in production
+  runApp(MahmoudEnterpriseApp(isSecure: isSecure)); 
 }
 
 class MahmoudEnterpriseApp extends StatelessWidget {
@@ -44,7 +45,7 @@ class MahmoudEnterpriseApp extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(40),
                     child: Text(
-                      "Security Alert: Environment compromised. Application terminated to protect your institutional assets.",
+                      "Security Alert: Environment compromised. Application terminated to protect institutional assets.",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.w900, color: Colors.red, fontSize: 16),
                     ),
@@ -114,9 +115,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                  padding: const EdgeInsets.all(30),
                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppTheme.primary.withAlpha(128), width: 2),
+                    border: Border.all(color: AppTheme.primary.withValues(alpha: 0.5), width: 2),
                  ),
-                 child: const Icon(Icons.shield_outlined, size: 80, color: AppTheme.primary),
+                 child: const Icon(Icons.security, size: 80, color: AppTheme.primary),
               ),
               const SizedBox(height: 40),
               const Text(
@@ -129,7 +130,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
+              const Text(
                 "ENTERPRISE ECOSYSTEM",
                 style: TextStyle(
                   color: AppTheme.primary,

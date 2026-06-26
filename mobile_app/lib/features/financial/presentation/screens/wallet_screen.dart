@@ -43,7 +43,7 @@ class WalletScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(48.r),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primary.withAlpha(77),
+            color: AppTheme.primary.withValues(alpha: 0.3),
             blurRadius: 40,
             offset: const Offset(0, 20),
           ),
@@ -55,19 +55,35 @@ class WalletScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Liquid Capital", style: TextStyle(color: Colors.white.withAlpha(138), fontSize: 14.sp, fontWeight: FontWeight.bold, uppercase: true, tracking: 1)),
+              Text(
+                "LIQUID CAPITAL", 
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.5), 
+                  fontSize: 14.sp, 
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                )
+              ),
               const Icon(Icons.account_balance_wallet_outlined, color: AppTheme.primary, size: 24),
             ],
           ),
           SizedBox(height: 16.h),
-          Text("\$4,250.00", style: TextStyle(color: Colors.white, fontSize: 40.sp, fontWeight: FontWeight.w900, letterSpacing: -1)),
+          Text(
+            "\$4,250.00", 
+            style: TextStyle(
+              color: Colors.white, 
+              fontSize: 40.sp, 
+              fontWeight: FontWeight.w900, 
+              letterSpacing: -1
+            )
+          ),
           SizedBox(height: 40.h),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(13),
+              color: Colors.white.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(20.r),
-              border: Border.all(color: Colors.white.withAlpha(13)),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -76,7 +92,12 @@ class WalletScreen extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   "NODE-ID: ****9821",
-                  style: TextStyle(color: Colors.white.withAlpha(97), fontSize: 10.sp, fontWeight: FontWeight.black, letterSpacing: 2),
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.4), 
+                    fontSize: 10.sp, 
+                    fontWeight: FontWeight.w900, 
+                    letterSpacing: 2
+                  ),
                 ),
               ],
             ),
@@ -106,13 +127,20 @@ class WalletScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: color == AppTheme.primary ? color : Colors.white,
             borderRadius: BorderRadius.circular(24.r),
-            border: color == Colors.black ? Border.all(color: Colors.slate-100) : null,
-            boxShadow: color == AppTheme.primary ? [BoxShadow(color: color.withAlpha(51), blurRadius: 20, offset: const Offset(0, 10))] : null,
+            border: color == Colors.black ? Border.all(color: Colors.blueGrey.withValues(alpha: 0.1)) : null,
+            boxShadow: color == AppTheme.primary ? [BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: 20, offset: const Offset(0, 10))] : null,
           ),
-          child: Icon(icon, color: color == AppTheme.primary ? Colors.white : Colors.slate-600, size: 24),
+          child: Icon(icon, color: color == AppTheme.primary ? Colors.white : Colors.blueGrey[600], size: 24),
         ),
         SizedBox(height: 12.h),
-        Text(label, style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w900, color: Colors.black87, uppercase: true)),
+        Text(
+          label.toUpperCase(), 
+          style: TextStyle(
+            fontSize: 11.sp, 
+            fontWeight: FontWeight.w900, 
+            color: Colors.black87
+          )
+        ),
       ],
     );
   }
@@ -122,7 +150,7 @@ class WalletScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Text("Audit Feed", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
-        TextButton(onPressed: () {}, child: const Text("Export CSV", style: TextStyle(fontWeight: FontWeight.black))),
+        TextButton(onPressed: () {}, child: const Text("Export CSV", style: TextStyle(fontWeight: FontWeight.w900))),
       ],
     );
   }
@@ -140,14 +168,14 @@ class WalletScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(32.r),
-            border: Border.all(color: Colors.slate-50),
+            border: Border.all(color: Colors.blueGrey.withValues(alpha: 0.05)),
           ),
           child: Row(
             children: [
               Container(
                 padding: EdgeInsets.all(14.w),
                 decoration: BoxDecoration(
-                  color: isDebit ? AppTheme.error.withAlpha(26) : AppTheme.success.withAlpha(26),
+                  color: isDebit ? AppTheme.error.withValues(alpha: 0.1) : AppTheme.success.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(18.r),
                 ),
                 child: Icon(
@@ -165,7 +193,14 @@ class WalletScreen extends StatelessWidget {
                       isDebit ? "Inventory Acquisition" : "Capital Infusion",
                       style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15.sp),
                     ),
-                    Text("Protocol: CLEAR-NET • Institutional", style: TextStyle(color: Colors.black26, fontSize: 10.sp, fontWeight: FontWeight.black, uppercase: true)),
+                    Text(
+                      "PROTOCOL: CLEAR-NET • INSTITUTIONAL", 
+                      style: TextStyle(
+                        color: Colors.black26, 
+                        fontSize: 10.sp, 
+                        fontWeight: FontWeight.w900
+                      )
+                    ),
                   ],
                 ),
               ),

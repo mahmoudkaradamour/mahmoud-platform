@@ -16,6 +16,7 @@ class ProductDetailScreen extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 450.h,
             pinned: true,
+            stretch: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: AppTheme.background,
@@ -39,7 +40,12 @@ class ProductDetailScreen extends StatelessWidget {
                             SizedBox(width: 12.w),
                             Text(
                               "Initiate AR View",
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 13.sp, letterSpacing: 1),
+                              style: TextStyle(
+                                color: Colors.white, 
+                                fontWeight: FontWeight.w900, 
+                                fontSize: 13.sp, 
+                                letterSpacing: 1
+                              ),
                             ),
                           ],
                         ),
@@ -67,7 +73,12 @@ class ProductDetailScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "Enterprise Certified",
-                          style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 10.sp, letterSpacing: 1),
+                          style: TextStyle(
+                            color: AppTheme.primary, 
+                            fontWeight: FontWeight.w900, 
+                            fontSize: 10.sp, 
+                            letterSpacing: 1
+                          ),
                         ),
                       ),
                       IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline, color: AppTheme.error)),
@@ -76,7 +87,12 @@ class ProductDetailScreen extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Text(
                     "iPhone 15 Pro Max",
-                    style: TextStyle(fontSize: 34.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey[900], letterSpacing: -1.5),
+                    style: TextStyle(
+                      fontSize: 34.sp, 
+                      fontWeight: FontWeight.w900, 
+                      color: Colors.blueGrey[900], 
+                      letterSpacing: -1.5
+                    ),
                   ),
                   SizedBox(height: 12.h),
                   Text(
@@ -90,8 +106,24 @@ class ProductDetailScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Market Valuation", style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w900, fontSize: 11, letterSpacing: 1)),
-                          Text("\$1,599.00", style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.w900, color: AppTheme.primary, letterSpacing: -1)),
+                          Text(
+                            "Market Valuation", 
+                            style: TextStyle(
+                              color: Colors.blueGrey, 
+                              fontWeight: FontWeight.w900, 
+                              fontSize: 11.sp, 
+                              letterSpacing: 1
+                            )
+                          ),
+                          Text(
+                            "\$1,599.00", 
+                            style: TextStyle(
+                              fontSize: 36.sp, 
+                              fontWeight: FontWeight.w900, 
+                              color: AppTheme.primary, 
+                              letterSpacing: -1
+                            )
+                          ),
                         ],
                       ),
                       Container(
@@ -104,14 +136,28 @@ class ProductDetailScreen extends StatelessWidget {
                           children: [
                             const Icon(Icons.check_circle_outline, color: AppTheme.success, size: 16),
                             SizedBox(width: 8.w),
-                            Text("Ready", style: TextStyle(color: AppTheme.success, fontWeight: FontWeight.w900, fontSize: 12.sp)),
+                            Text(
+                              "Ready", 
+                              style: TextStyle(
+                                color: AppTheme.success, 
+                                fontWeight: FontWeight.w900, 
+                                fontSize: 12.sp
+                              )
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 56.h),
-                  const Text("Technical Parameters", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
+                  Text(
+                    "Technical Parameters", 
+                    style: TextStyle(
+                      fontSize: 20.sp, 
+                      fontWeight: FontWeight.w900, 
+                      letterSpacing: -0.5
+                    )
+                  ),
                   SizedBox(height: 24.h),
                   _buildInstitutionalSpec("Silicon", "A17 Pro Cluster"),
                   _buildInstitutionalSpec("Imaging", "48MP Phase Detect AF"),
@@ -139,7 +185,14 @@ class ProductDetailScreen extends StatelessWidget {
             elevation: 15,
             shadowColor: Colors.black.withValues(alpha: 0.3),
           ),
-          child: const Text("Initiate Acquisition", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, letterSpacing: 1)),
+          child: Text(
+            "Initiate Acquisition", 
+            style: TextStyle(
+              fontSize: 18.sp, 
+              fontWeight: FontWeight.w900, 
+              letterSpacing: 1
+            )
+          ),
         ),
       ),
     );
@@ -156,8 +209,22 @@ class ProductDetailScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(key, style: const TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w900, fontSize: 12)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.blueGrey, fontSize: 14)),
+          Text(
+            key, 
+            style: const TextStyle(
+              color: Colors.blueGrey, 
+              fontWeight: FontWeight.w900, 
+              fontSize: 12
+            )
+          ),
+          Text(
+            value, 
+            style: const TextStyle(
+              fontWeight: FontWeight.w900, 
+              color: Colors.blueGrey, 
+              fontSize: 14
+            )
+          ),
         ],
       ),
     );

@@ -25,7 +25,10 @@ class CatalogScreen extends StatelessWidget {
             _buildPersonalizedSection(context),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
-              child: const Text("Marketplace Inventory", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+              child: Text(
+                "Marketplace Inventory", 
+                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18.sp)
+              ),
             ),
             GridView.builder(
               shrinkWrap: true,
@@ -33,7 +36,7 @@ class CatalogScreen extends StatelessWidget {
               padding: EdgeInsets.all(20.w),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.65,
+                childAspectRatio: 0.62, // Slightly adjusted ratio to prevent overflow
                 crossAxisSpacing: 15.w,
                 mainAxisSpacing: 15.h,
               ),
@@ -57,7 +60,17 @@ class CatalogScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Picked For You (AI)", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: AppTheme.primary)),
+              Expanded(
+                child: Text(
+                  "Picked For You (AI)", 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900, 
+                    fontSize: 18.sp, 
+                    color: AppTheme.primary
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               TextButton(onPressed: () {}, child: const Text("View All")),
             ],
           ),
@@ -73,7 +86,7 @@ class CatalogScreen extends StatelessWidget {
               return Container(
                 width: 140.w,
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withValues(alpha: 0.8), // Fixed syntax
+                  color: AppTheme.primary.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(30.r),
                 ),
                 child: const Center(child: Icon(Icons.auto_awesome, color: Colors.white30, size: 40)),
@@ -97,7 +110,13 @@ class CatalogScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30.r),
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 15, offset: const Offset(0, 8))],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02), 
+              blurRadius: 15, 
+              offset: const Offset(0, 8)
+            )
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,15 +132,34 @@ class CatalogScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15.w),
+              padding: EdgeInsets.all(12.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Electronics", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey)),
+                  Text(
+                    "Electronics", 
+                    style: TextStyle(
+                      fontSize: 10.sp, 
+                      fontWeight: FontWeight.w900, 
+                      color: Colors.blueGrey
+                    )
+                  ),
                   SizedBox(height: 4.h),
-                  const Text("iPhone 15 Pro", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold), maxLines: 1),
-                  SizedBox(height: 12.h),
-                  Text("\$1200", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, color: AppTheme.primary)),
+                  Text(
+                    "iPhone 15 Pro", 
+                    style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold), 
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    "\$1200", 
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w900, 
+                      color: AppTheme.primary
+                    )
+                  ),
                 ],
               ),
             ),
