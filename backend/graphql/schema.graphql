@@ -1,0 +1,32 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Scalars\\DateTime")
+
+type Query {
+    "Discover products via MongoDB optimized discovery layer"
+    products: [Product!]! @all(model: "App\\Modules\\Catalog\\Infrastructure\\Models\\Product")
+    product(id: ID! @eq): Product @find(model: "App\\Modules\\Catalog\\Infrastructure\\Models\\Product")
+}
+
+type Product {
+    id: ID!
+    store_id: String!
+    name: ProductLocalizedName!
+    slug: String!
+    category_path: String!
+    base_price: Float!
+    currency: String!
+    attributes: [ProductAttribute!]!
+    media: [String!]!
+    status: String!
+    created_at: DateTime!
+}
+
+type ProductLocalizedName {
+    ar: String
+    en: String
+}
+
+type ProductAttribute {
+    key: String!
+    value: String!
+}
