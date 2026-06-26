@@ -1,50 +1,48 @@
-# API Specification & Standards
+# Enterprise API Specification (V1)
 
-## 1. Design Philosophy
-*   **RESTful for Resources**: Use standard HTTP methods (GET, POST, PUT, DELETE, PATCH).
-*   **GraphQL for Complex Queries**: Use GraphQL for the "Customer Discovery" phase to allow the Flutter app to fetch only the data it needs (e.g., product list with specific attributes).
-*   **Versioned**: All APIs prefixed with `/v1/`.
+## Base URL
+`https://api.mahmoud-platform.com/api/v1`
 
-## 2. Core REST Endpoints (Sample)
+## Response Envelope Standard
+All API responses follow a strict enterprise envelope to ensure predictable parsing for the Flutter frontend:
 
-### Identity Service
-*   `POST /v1/auth/register`: Register new user/merchant.
-*   `POST /v1/auth/login`: Issue JWT pair.
-*   `POST /v1/auth/mfa/verify`: Verify TOTP/SMS code.
-
-### Catalog Service
-*   `GET /v1/products`: List products (with ElasticSearch query params).
-*   `GET /v1/products/{id}`: Detailed product info.
-*   `POST /v1/products/import`: Upload Excel for bulk ingestion.
-
-### Order Service
-*   `POST /v1/orders`: Create new order.
-*   `GET /v1/orders/{id}`: Order status & history.
-*   `PATCH /v1/orders/{id}/status`: Admin/Seller update status.
-
-## 3. GraphQL Schema (Preview)
-```graphql
-type Product {
-  id: ID!
-  name: LocalizedString!
-  basePrice: Float!
-  attributes: [Attribute!]
-  media: Media!
-  seller: Store!
-}
-
-type Query {
-  searchProducts(query: String, filter: ProductFilter): [Product]
-  getLiveStreams: [LiveStream]
-}
-```
-
-## 4. Response Format
-Standard JSON wrapper:
 ```json
 {
   "success": true,
   "data": { ... },
-  "metadata": { "timestamp": "...", "version": "v1" }
+  "message": "Localized message",
+  "errors": null
 }
 ```
+
+## 1. Identity & Access Management
+| Method | Endpoint | Description | Auth |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/auth/register` | User onboarding | Guest |
+| `POST` | `/auth/login` | Token issuance (Sanctum) | Guest |
+| `POST` | `/auth/logout` | Token revocation | Token |
+| `GET` | `/auth/me` | Current profile | Token |
+
+## 2. Product Catalog
+| Method | Endpoint | Description | Auth |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/catalog/products` | Paginated product discovery | Guest |
+| `GET` | `/catalog/products/{id}` | Detailed product document | Guest |
+| `POST` | `/catalog/products` | Merchant product creation | Token |
+
+## 3. Reverse Bidding (On-Demand)
+| Method | Endpoint | Description | Auth |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/bidding/requests` | Post a new product request | Consumer |
+| `POST` | `/bidding/quotes` | Submit a merchant bid | Merchant |
+| `POST` | `/bidding/quotes/{id}/accept` | Accept a specific bid | Consumer |
+
+## 4. Logistics & Tracking
+| Method | Endpoint | Description | Auth |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/logistics/track/{number}` | Public shipment tracking | Public |
+| `GET` | `/logistics/my-shipments` | Personal shipment history | Token |
+
+## 🛡 Security Implementation
+- **Rate Limit**: 60 requests/minute per IP/User.
+- **Header Guard**: Every response contains `Strict-Transport-Security`, `X-XSS-Protection`, and `Content-Security-Policy`.
