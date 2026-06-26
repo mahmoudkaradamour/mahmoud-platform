@@ -10,6 +10,7 @@ const menuItems = [
   { name: "الرئيسية", icon: LayoutDashboard, href: "/dashboard" },
   { name: "متاجري", icon: Store, href: "/dashboard/stores" },
   { name: "المنتجات", icon: Package, href: "/dashboard/products" },
+  { name: "فرص المزايدة", icon: Gavel, href: "/dashboard/opportunities" },
   { name: "المحادثات", icon: MessageSquare, href: "/dashboard/messages" },
   { name: "الإعدادات", icon: Settings, href: "/dashboard/settings" },
 ];
