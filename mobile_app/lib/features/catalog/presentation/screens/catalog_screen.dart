@@ -3,10 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 import 'package:mobile_app/features/catalog/presentation/screens/product_detail_screen.dart';
 
-/**
- * Mobile Catalog Discovery Screen.
- * Implements ZCL (Zero Cognitive Load) via clean grid layout and high-fidelity cards.
- */
+/// Mobile Catalog Discovery Screen.
+/// Implements ZCL (Zero Cognitive Load) via clean grid layout and high-fidelity cards.
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
 
@@ -34,7 +32,7 @@ class CatalogScreen extends StatelessWidget {
           crossAxisSpacing: 15.w,
           mainAxisSpacing: 15.h,
         ),
-        itemCount: 6, // Mock count
+        itemCount: 6,
         itemBuilder: (context, index) {
           return _buildProductCard(context, index);
         },
@@ -56,7 +54,7 @@ class CatalogScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withAlpha(8),
               blurRadius: 15,
               offset: const Offset(0, 8),
             ),
@@ -65,7 +63,6 @@ class CatalogScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image Placeholder with Badge
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -91,7 +88,7 @@ class CatalogScreen extends StatelessWidget {
                           children: [
                             const Icon(Icons.star, size: 12, color: Colors.amber),
                             SizedBox(width: 2.w),
-                            Text("4.9", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.black)),
+                            Text("4.9", style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900)),
                           ],
                         ),
                       ),
@@ -100,8 +97,6 @@ class CatalogScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
-            // Info
             Padding(
               padding: EdgeInsets.all(15.w),
               child: Column(
@@ -109,7 +104,7 @@ class CatalogScreen extends StatelessWidget {
                 children: [
                   Text(
                     "إلكترونيات",
-                    style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.black, color: Colors.black26),
+                    style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w900, color: Colors.black26),
                   ),
                   SizedBox(height: 4.h),
                   Text(
@@ -120,11 +115,11 @@ class CatalogScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 12.h),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.between,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "\$1200",
-                        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.black, color: AppTheme.primary),
+                        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900, color: AppTheme.primary),
                       ),
                       Container(
                         padding: EdgeInsets.all(6.w),

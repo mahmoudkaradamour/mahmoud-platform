@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/**
- * Real-time Shipment Tracking Screen.
- * Features: Interactive Map (stubbed), Status Timeline, and Courier Contact.
- */
+/// Real-time Shipment Tracking Screen.
+/// Features: Interactive Map (stubbed), Status Timeline, and Courier Contact.
 class TrackingScreen extends StatelessWidget {
   const TrackingScreen({super.key});
 
@@ -15,10 +13,7 @@ class TrackingScreen extends StatelessWidget {
       backgroundColor: AppTheme.background,
       body: Stack(
         children: [
-          // Map Background Layer
           _buildMapPlaceholder(),
-          
-          // Back Button
           Positioned(
             top: 60.h,
             right: 20.w,
@@ -30,8 +25,6 @@ class TrackingScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          // Draggable Bottom Sheet for Info
           _buildTrackingDetails(),
         ],
       ),
@@ -42,7 +35,7 @@ class TrackingScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: const Color(0xFFE5E2DA), // Google Maps-like base color
+      color: const Color(0xFFE5E2DA),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +44,7 @@ class TrackingScreen extends StatelessWidget {
             SizedBox(height: 20.h),
             const Text(
               "محرك الخرائط السيادي نشط",
-              style: TextStyle(fontWeight: FontWeight.black, color: Colors.black26),
+              style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black26),
             ),
           ],
         ),
@@ -69,13 +62,12 @@ class TrackingScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(40.r)),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20)],
+            boxShadow: [BoxShadow(color: Colors.black.withAlpha(26), blurRadius: 20)],
           ),
           child: ListView(
             controller: scrollController,
             padding: EdgeInsets.all(30.w),
             children: [
-              // Handle
               Center(
                 child: Container(
                   width: 50.w,
@@ -84,19 +76,17 @@ class TrackingScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30.h),
-
-              // Courier Info
               Row(
-                mainAxisAlignment: MainAxisAlignment.between,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(radius: 25.r, backgroundColor: AppTheme.primary.withOpacity(0.1), child: const Icon(Icons.person, color: AppTheme.primary)),
+                      CircleAvatar(radius: 25.r, backgroundColor: AppTheme.primary.withAlpha(26), child: const Icon(Icons.person, color: AppTheme.primary)),
                       SizedBox(width: 15.w),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("أحمد منصور", style: TextStyle(fontWeight: FontWeight.black, fontSize: 16)),
+                          const Text("أحمد منصور", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16)),
                           Text("مندوب التوصيل • سيارة بيضاء", style: TextStyle(color: Colors.black38, fontSize: 10.sp, fontWeight: FontWeight.bold)),
                         ],
                       ),
@@ -111,22 +101,17 @@ class TrackingScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: 40.h),
               const Divider(color: Colors.black12),
               SizedBox(height: 30.h),
-
-              // Timeline Header
               Row(
-                mainAxisAlignment: MainAxisAlignment.between,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("حالة الشحنة", style: TextStyle(fontWeight: FontWeight.black, fontSize: 18)),
-                  Text("يصل خلال 15 دقيقة", style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.black, fontSize: 12.sp)),
+                  const Text("حالة الشحنة", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+                  Text("يصل خلال 15 دقيقة", style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w900, fontSize: 12.sp)),
                 ],
               ),
               SizedBox(height: 30.h),
-
-              // Simplified Timeline
               _buildTimelineTile("تم الاستلام", "10:15 AM", isPast: true),
               _buildTimelineTile("في الطريق إليك", "11:02 AM", isPast: true, isCurrent: true),
               _buildTimelineTile("تم التسليم", "متوقع قريباً", isPast: false),
@@ -141,7 +126,7 @@ class TrackingScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withAlpha(26),
         borderRadius: BorderRadius.circular(15.r),
       ),
       child: Icon(icon, color: color, size: 20),
@@ -157,13 +142,13 @@ class TrackingScreen extends StatelessWidget {
               width: 20.w,
               height: 20.h,
               decoration: BoxDecoration(
-                color: isCurrent ? AppTheme.primary : (isPast ? AppTheme.primary.withOpacity(0.2) : Colors.black12),
+                color: isCurrent ? AppTheme.primary : (isPast ? AppTheme.primary.withAlpha(51) : Colors.black12),
                 shape: BoxShape.circle,
                 border: isCurrent ? Border.all(color: Colors.white, width: 4) : null,
               ),
               child: isCurrent ? null : (isPast ? const Icon(Icons.check, size: 12, color: AppTheme.primary) : null),
             ),
-            Container(width: 2.w, height: 40.h, color: isPast ? AppTheme.primary.withOpacity(0.2) : Colors.black12),
+            Container(width: 2.w, height: 40.h, color: isPast ? AppTheme.primary.withAlpha(51) : Colors.black12),
           ],
         ),
         SizedBox(width: 20.w),
@@ -171,7 +156,7 @@ class TrackingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontWeight: FontWeight.black, fontSize: 14.sp, color: isPast ? Colors.black87 : Colors.black26)),
+              Text(title, style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp, color: isPast ? Colors.black87 : Colors.black26)),
               Text(time, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.bold)),
               SizedBox(height: 25.h),
             ],

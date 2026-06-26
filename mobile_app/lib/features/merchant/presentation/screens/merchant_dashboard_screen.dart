@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/**
- * Mobile Merchant Command Center.
- * Provides high-level metrics and quick access to inventory, orders, and live streaming.
- */
+/// Mobile Merchant Command Center.
+/// Provides high-level metrics and quick access to inventory, orders, and live streaming.
 class MerchantDashboardScreen extends StatelessWidget {
   const MerchantDashboardScreen({super.key});
 
@@ -47,7 +45,7 @@ class MerchantDashboardScreen extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           "لوحة تحكم التاجر",
-          style: TextStyle(fontWeight: FontWeight.black, fontSize: 18.sp, color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18.sp, color: Colors.white),
         ),
         background: Container(
           decoration: const BoxDecoration(
@@ -62,7 +60,7 @@ class MerchantDashboardScreen extends StatelessWidget {
               Positioned(
                 right: -20,
                 bottom: -20,
-                child: Icon(Icons.storefront, size: 150, color: Colors.white.withOpacity(0.1)),
+                child: Icon(Icons.storefront, size: 150, color: Colors.white.withAlpha(26)),
               ),
             ],
           ),
@@ -94,7 +92,7 @@ class MerchantDashboardScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24.r),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10)],
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +100,7 @@ class MerchantDashboardScreen extends StatelessWidget {
         children: [
           Icon(icon, color: color, size: 20),
           SizedBox(height: 8.h),
-          Text(value, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.black)),
+          Text(value, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900)),
           Text(label, style: TextStyle(fontSize: 10.sp, color: Colors.black38, fontWeight: FontWeight.bold)),
         ],
       ),
@@ -110,7 +108,7 @@ class MerchantDashboardScreen extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Text(title, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.black));
+    return Text(title, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900));
   }
 
   Widget _buildQuickActions(BuildContext context) {
@@ -131,13 +129,13 @@ class MerchantDashboardScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withAlpha(26),
             borderRadius: BorderRadius.circular(20.r),
           ),
           child: Icon(icon, color: color, size: 28),
         ),
         SizedBox(height: 10.h),
-        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.black)),
+        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900)),
       ],
     );
   }
@@ -154,7 +152,7 @@ class MerchantDashboardScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(25.r),
-            border: Border.all(color: Colors.black.withOpacity(0.02)),
+            border: Border.all(color: Colors.black.withAlpha(5)),
           ),
           child: Row(
             children: [
@@ -164,7 +162,7 @@ class MerchantDashboardScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("طلب #9821 - سامر حسن", style: TextStyle(fontWeight: FontWeight.black, fontSize: 14.sp)),
+                    Text("طلب #9821 - سامر حسن", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp)),
                     Text("آيفون 15 برو • بانتظار التجهيز", style: TextStyle(color: Colors.black26, fontSize: 10.sp, fontWeight: FontWeight.bold)),
                   ],
                 ),

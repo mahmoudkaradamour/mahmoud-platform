@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/**
- * Sovereign App Theme Configuration.
- * Aligns with the global Design System tokens.
- * Focused on ZCL (Zero Cognitive Load) and High-Fidelity UX.
- */
+/// Sovereign App Theme Configuration.
+/// Aligns with the global Design System tokens.
+/// Focused on ZCL (Zero Cognitive Load) and High-Fidelity UX.
 class AppTheme {
   static const Color primary = Color(0xFF0A84FF);
   static const Color secondary = Color(0xFF30B0C7);
@@ -13,6 +11,7 @@ class AppTheme {
   static const Color surface = Colors.white;
   static const Color error = Color(0xFFFF3B30);
   static const Color success = Color(0xFF34C759);
+  static const Color warning = Color(0xFFFFCC00);
   static const Color sovereignGold = Color(0xFFD4AF37);
 
   static ThemeData get lightTheme {
@@ -36,7 +35,7 @@ class AppTheme {
         centerTitle: false,
         titleTextStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         color: surface,

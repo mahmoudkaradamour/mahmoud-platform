@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/**
- * Mobile Login Interface - ZCL Architecture.
- * Designed to meet Apple/Google premium store standards.
- */
+/// Mobile Login Interface - ZCL Architecture.
+/// Designed to meet Apple/Google premium store standards.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -28,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             end: Alignment.bottomCenter,
             colors: [
               AppTheme.background,
-              Colors.white.withOpacity(0.9),
+              Colors.white.withAlpha(230),
             ],
           ),
         ),
@@ -39,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 60.h),
-                // Branding Header
                 Center(
                   child: Container(
                     padding: EdgeInsets.all(20.w),
@@ -48,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(30.r),
                       boxShadow: [
                         BoxShadow(
-                          color: AppTheme.primary.withOpacity(0.1),
+                          color: AppTheme.primary.withAlpha(26),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -67,8 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(height: 40.h),
-
-                // Form Fields
                 _buildTextField(
                   controller: _emailController,
                   label: "البريد الإلكتروني",
@@ -81,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   icon: Icons.lock_outline,
                   isPassword: true,
                 ),
-
                 SizedBox(height: 12.h),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -90,36 +84,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text("نسيت كلمة المرور؟", style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
-
                 SizedBox(height: 30.h),
-                // Login Button
                 ElevatedButton(
-                  onPressed: () {
-                    // Auth Logic would be triggered here via BLoC
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primary,
                     foregroundColor: Colors.white,
                     minimumSize: Size(double.infinity, 65.h),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
                     elevation: 10,
-                    shadowColor: AppTheme.primary.withOpacity(0.4),
+                    shadowColor: AppTheme.primary.withAlpha(102),
                   ),
                   child: Text(
                     "تسجيل الدخول",
-                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.black),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900),
                   ),
                 ),
-
                 SizedBox(height: 40.h),
-                // Footer
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("ليس لديك حساب؟"),
                     TextButton(
                       onPressed: () {},
-                      child: const Text("انضم الآن", style: TextStyle(fontWeight: FontWeight.black, color: AppTheme.primary)),
+                      child: const Text("انضم الآن", style: TextStyle(fontWeight: FontWeight.w900, color: AppTheme.primary)),
                     ),
                   ],
                 ),
@@ -142,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4)),
         ],
       ),
       child: TextField(

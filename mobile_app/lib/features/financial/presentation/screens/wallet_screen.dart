@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/shared/theme/app_theme.dart';
 
-/**
- * Sovereign Financial Wallet Screen.
- * Displays balance, recent transactions, and top-up options.
- * Aligns with the Financial module in the backend.
- */
+/// Sovereign Financial Wallet Screen.
+/// Displays balance, recent transactions, and top-up options.
+/// Aligns with the Financial module in the backend.
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
 
@@ -46,7 +44,7 @@ class WalletScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(40.r),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primary.withOpacity(0.3),
+            color: AppTheme.primary.withAlpha(77),
             blurRadius: 30,
             offset: const Offset(0, 15),
           ),
@@ -56,24 +54,24 @@ class WalletScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.between,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("الرصيد المتاح", style: TextStyle(color: Colors.white54, fontSize: 14.sp, fontWeight: FontWeight.bold)),
+              Text("الرصيد المتاح", style: TextStyle(color: Colors.white.withAlpha(138), fontSize: 14.sp, fontWeight: FontWeight.bold)),
               const Icon(Icons.security, color: AppTheme.primary, size: 20),
             ],
           ),
           SizedBox(height: 10.h),
-          Text("\$4,250.00", style: TextStyle(color: Colors.white, fontSize: 36.sp, fontWeight: FontWeight.black)),
+          Text("\$4,250.00", style: TextStyle(color: Colors.white, fontSize: 36.sp, fontWeight: FontWeight.w900)),
           SizedBox(height: 30.h),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.05),
+              color: Colors.white.withAlpha(13),
               borderRadius: BorderRadius.circular(15.r),
             ),
             child: Text(
               "**** **** **** 9821",
-              style: TextStyle(color: Colors.white38, fontSize: 12.sp, letterSpacing: 2),
+              style: TextStyle(color: Colors.white.withAlpha(97), fontSize: 12.sp, letterSpacing: 2),
             ),
           ),
         ],
@@ -102,21 +100,21 @@ class WalletScreen extends StatelessWidget {
             color: color == AppTheme.primary ? color : Colors.white,
             borderRadius: BorderRadius.circular(20.r),
             border: color == Colors.black ? Border.all(color: Colors.black12) : null,
-            boxShadow: color == AppTheme.primary ? [BoxShadow(color: color.withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 8))] : null,
+            boxShadow: color == AppTheme.primary ? [BoxShadow(color: color.withAlpha(51), blurRadius: 15, offset: const Offset(0, 8))] : null,
           ),
           child: Icon(icon, color: color == AppTheme.primary ? Colors.white : Colors.black87),
         ),
         SizedBox(height: 10.h),
-        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.black, color: Colors.black87)),
+        Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900, color: Colors.black87)),
       ],
     );
   }
 
   Widget _buildTransactionHeader() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.between,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("آخر المعاملات", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.black)),
+        Text("آخر المعاملات", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w900)),
         TextButton(onPressed: () {}, child: const Text("عرض الكل", style: TextStyle(fontWeight: FontWeight.bold))),
       ],
     );
@@ -134,14 +132,14 @@ class WalletScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(25.r),
-            border: Border.all(color: Colors.black.withOpacity(0.02)),
+            border: Border.all(color: Colors.black.withAlpha(5)),
           ),
           child: Row(
             children: [
               Container(
                 padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
-                  color: index == 1 ? AppTheme.error.withOpacity(0.1) : AppTheme.success.withOpacity(0.1),
+                  color: index == 1 ? AppTheme.error.withAlpha(26) : AppTheme.success.withAlpha(26),
                   borderRadius: BorderRadius.circular(15.r),
                 ),
                 child: Icon(
@@ -157,7 +155,7 @@ class WalletScreen extends StatelessWidget {
                   children: [
                     Text(
                       index == 1 ? "شراء آيفون 15" : "شحن رصيد محفظة",
-                      style: TextStyle(fontWeight: FontWeight.black, fontSize: 14.sp),
+                      style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp),
                     ),
                     Text("منذ ساعتين • عبر بطاقة بنكية", style: TextStyle(color: Colors.black26, fontSize: 10.sp, fontWeight: FontWeight.bold)),
                   ],
@@ -166,7 +164,7 @@ class WalletScreen extends StatelessWidget {
               Text(
                 index == 1 ? "-\$1200" : "+\$500",
                 style: TextStyle(
-                  fontWeight: FontWeight.black,
+                  fontWeight: FontWeight.w900,
                   fontSize: 16.sp,
                   color: index == 1 ? Colors.black87 : AppTheme.success,
                 ),
