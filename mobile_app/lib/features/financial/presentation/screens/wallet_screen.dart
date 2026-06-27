@@ -149,7 +149,14 @@ class WalletScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text("Audit Feed", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
+        Text(
+          "Audit Feed", 
+          style: TextStyle(
+            fontSize: 20.sp, 
+            fontWeight: FontWeight.w900, 
+            letterSpacing: -0.5
+          )
+        ),
         TextButton(onPressed: () {}, child: const Text("Export CSV", style: TextStyle(fontWeight: FontWeight.w900))),
       ],
     );
