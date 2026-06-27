@@ -49,9 +49,9 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
             Container(
               padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
-                color: AppTheme.primary.withValues(alpha: 0.05),
+                color: AppTheme.primary.withAlpha(13),
                 borderRadius: BorderRadius.circular(32.r),
-                border: Border.all(color: AppTheme.primary.withValues(alpha: 0.1)),
+                border: Border.all(color: AppTheme.primary.withAlpha(26)),
               ),
               child: Row(
                 children: [
@@ -76,7 +76,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
                 minimumSize: Size(double.infinity, 70.h),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
                 elevation: 10,
-                shadowColor: AppTheme.primary.withValues(alpha: 0.3),
+                shadowColor: AppTheme.primary.withAlpha(77),
               ),
               child: const Text("Execute Market Order", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, letterSpacing: 0.5)),
             ),
@@ -100,7 +100,10 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
   Widget _buildInputLabel(String label) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10.h, left: 4.w),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Colors.blueGrey, letterSpacing: 1)),
+      child: Text(
+        label.toUpperCase(), 
+        style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Colors.blueGrey, letterSpacing: 1)
+      ),
     );
   }
 
@@ -109,7 +112,7 @@ class _PostRequestScreenState extends State<PostRequestScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22.r),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: TextField(
         controller: controller,

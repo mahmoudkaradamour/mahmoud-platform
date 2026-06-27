@@ -61,7 +61,7 @@ class MerchantDashboardScreen extends StatelessWidget {
               Positioned(
                 right: -40,
                 bottom: -40,
-                child: Icon(Icons.analytics_outlined, size: 240, color: Colors.white.withValues(alpha: 0.05)),
+                child: Icon(Icons.analytics_outlined, size: 240, color: Colors.white.withAlpha(13)),
               ),
             ],
           ),
@@ -93,7 +93,7 @@ class MerchantDashboardScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30.r),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@ class MerchantDashboardScreen extends StatelessWidget {
           SizedBox(height: 10.h),
           Text(value, style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900, color: Colors.blueGrey[900])),
           Text(
-            label, 
+            label.toUpperCase(), 
             style: TextStyle(
               fontSize: 10.sp, 
               color: Colors.blueGrey[300], 
@@ -138,9 +138,9 @@ class MerchantDashboardScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(18.w),
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.05),
+            color: color.withAlpha(13),
             borderRadius: BorderRadius.circular(22.r),
-            border: Border.all(color: color.withValues(alpha: 0.1)),
+            border: Border.all(color: color.withAlpha(26)),
           ),
           child: Icon(icon, color: color, size: 28),
         ),
@@ -162,7 +162,7 @@ class MerchantDashboardScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(30.r),
-            border: Border.all(color: Colors.black.withValues(alpha: 0.02)),
+            border: Border.all(color: Colors.black.withAlpha(5)),
           ),
           child: Row(
             children: [
@@ -178,7 +178,7 @@ class MerchantDashboardScreen extends StatelessWidget {
                   children: [
                     Text("Entry #9821 - S. Hassan", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14.sp)),
                     Text(
-                      "SKU: IP15-PRO • Processing", 
+                      "SKU: IP15-PRO • PROCESSING",
                       style: TextStyle(
                         color: Colors.blueGrey[300], 
                         fontSize: 10.sp, 

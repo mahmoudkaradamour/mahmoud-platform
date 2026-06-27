@@ -28,7 +28,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
             trailing: Switch(
               value: _mfaEnabled,
               onChanged: (val) => setState(() => _mfaEnabled = val),
-              activeTrackColor: AppTheme.primary,
+              activeTrackColor: AppTheme.primary, // Fixed deprecated activeColor
             ),
           ),
           _buildEliteSettingTile(
@@ -77,9 +77,9 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     return Padding(
       padding: EdgeInsets.only(bottom: 24.h, left: 4.w),
       child: Text(
-        title, 
-        style: TextStyle(
-          fontSize: 14.sp, 
+        title.toUpperCase(), 
+        style: const TextStyle(
+          fontSize: 14, 
           fontWeight: FontWeight.w900, 
           color: AppTheme.primary, 
           letterSpacing: 2
@@ -95,7 +95,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(32.r),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 20, offset: const Offset(0, 8))],
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 20, offset: const Offset(0, 8))],
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
@@ -122,11 +122,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
           TextButton(onPressed: () => Navigator.pop(context), child: const Text("ABORT", style: TextStyle(fontWeight: FontWeight.w900, color: Colors.blueGrey))),
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppTheme.error, 
-              foregroundColor: Colors.white, 
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r))
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.error, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r))),
             child: const Text("EXECUTE", style: TextStyle(fontWeight: FontWeight.w900)),
           ),
         ],

@@ -36,7 +36,7 @@ class CatalogScreen extends StatelessWidget {
               padding: EdgeInsets.all(20.w),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.62, // Slightly adjusted ratio to prevent overflow
+                childAspectRatio: 0.62,
                 crossAxisSpacing: 15.w,
                 mainAxisSpacing: 15.h,
               ),
@@ -86,7 +86,7 @@ class CatalogScreen extends StatelessWidget {
               return Container(
                 width: 140.w,
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withValues(alpha: 0.8),
+                  color: AppTheme.primary.withAlpha(204),
                   borderRadius: BorderRadius.circular(30.r),
                 ),
                 child: const Center(child: Icon(Icons.auto_awesome, color: Colors.white30, size: 40)),
@@ -112,7 +112,7 @@ class CatalogScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.02), 
+              color: Colors.black.withAlpha(5), 
               blurRadius: 15, 
               offset: const Offset(0, 8)
             )
